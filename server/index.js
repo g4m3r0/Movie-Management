@@ -213,6 +213,18 @@ app.delete("/rating/:id", async(req, res) => {
     }
 });
 
+// Get suggestion
+app.get("/suggest", async(req, res) => {
+    try {
+        // Todo
+        const allMovies = await pool.query("SELECT * FROM mm_movie");
+
+        res.json(allMovies.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 app.listen(port, () => {
     console.log("Server has started on port " + port);
 });
