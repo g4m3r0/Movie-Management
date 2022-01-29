@@ -1,24 +1,8 @@
 import React, { Fragment, useState } from "react";
 
-const InputTodo = () => {
+const InputPerson = () => {
 
-    //const [description, setDescription] = useState('');
     const [inputs, setInputs] = useState({});
-
-    {/*
-    const onSubmitForm = async e => {
-        e.preventDefault();
-        try {
-            const body = {description};
-            const response = await fetch("http://localhost:5000/person", {method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)});
-
-            console.log(response);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-*/}
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -33,69 +17,67 @@ const InputTodo = () => {
             body: JSON.stringify(inputs)});
 
         console.log(response);
+        window.location = "/";
       }
 
     return (
         <Fragment>
             <h1 className="text-center my-5">Add Person</h1>
-            {/*
-            <form className="d-flex" onSubmit={onSubmitForm}>
-                <input 
-                    type="text"
-                    placeholder="add todo"
-                    className="form-control"
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                />
-                <button className="btn-success">Add</button>
-            </form>
-            */}
-
             <form onSubmit={handleSubmit}>
-                <label>Firstname:
+            <div className="form-group my-3">
+                <label>Firstname</label>
                     <input 
+                        className="form-control"
                         type="text" 
                         name="firstName" 
                         value={inputs.firstName || ""} 
                         onChange={handleChange}
                     />
-                </label>
-                <label>Lastname:
+            </div>
+            <div className="form-group my-3">
+                <label>Lastname</label>
                     <input 
+                        className="form-control"
                         type="text" 
                         name="lastName" 
                         value={inputs.lastName || ""} 
                         onChange={handleChange}
-                    />
-                </label>
-                <label>Birthday:
+                    />  
+            </div>
+            <div className="form-group my-3">
+                <label>Birthday</label>
                     <input 
+                        className="form-control"
                         type="text" 
                         name="birthday" 
                         value={inputs.birthday || ""} 
                         onChange={handleChange}
                     />
-                </label>
-                <label>Sex:
+            </div>
+            <div className="form-group my-3">
+                <label>Sex</label>
                     <input 
-                    type="number" 
-                    name="sex" 
-                    value={inputs.sex || ""} 
-                    onChange={handleChange}
+                        className="form-control"
+                        type="number" 
+                        name="sex" 
+                        value={inputs.sex || ""} 
+                        onChange={handleChange}
                     />
-                </label>
-                <label>CV:
+            </div>
+            <div className="form-group my-3">
+                <label>CV</label>
                     <input 
+                        className="form-control"
                         type="text" 
                         name="cv" 
                         value={inputs.cv || ""} 
                         onChange={handleChange}
                     />
-                </label>
-                <input className="btn-success" type="submit" />
+            </div>
+                <input className="btn btn-success" type="submit" />
             </form>
         </Fragment>
     );
 }
 
-export default InputTodo;
+export default InputPerson;
