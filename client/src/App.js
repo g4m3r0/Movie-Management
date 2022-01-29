@@ -1,18 +1,34 @@
-//import logo from './logo.svg';
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
+import  { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import InputTodo from './components/AddPerson';
-import ListPersons from './components/ListPersons';
 
-function App() {
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+import Home from './pages/Home';
+import Movie from './pages/Movie';
+import Suggest from './pages/Suggest';
+import Person from './pages/Person';
+
+
+class App extends Component {
+  render() {
   return (
-    <Fragment>
-      <div className='container'>
-        <InputTodo />
-        <ListPersons />
+      <div>
+        <Navbar />
+
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/movie" element={<Movie />}/>
+            <Route path="/suggest" element={<Suggest />}/>
+            <Route path="/person" element={<Person />}/>
+          </Routes>
+        </div>
+        <Footer />
       </div>
-    </Fragment>
   );
+}
 }
 
 export default App;
