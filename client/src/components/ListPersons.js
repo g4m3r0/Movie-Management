@@ -37,7 +37,7 @@ const ListPersons = () => {
 
     return (
         <Fragment>
-            <h1>List Person</h1>
+            <h1 className="text-center my-5">List Person</h1>
             <table className="table mt-5">
             <thead>
                 <tr>

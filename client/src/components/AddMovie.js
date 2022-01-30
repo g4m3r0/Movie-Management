@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-const InputPerson = () => {
+const InputMovie = () => {
 
     const [inputs, setInputs] = useState({});
 
@@ -13,7 +13,7 @@ const InputPerson = () => {
       const handleSubmit = async event => {
         event.preventDefault();
         
-        const response = await fetch("http://localhost:5000/person", {method: "POST", headers: { "Content-Type": "application/json" },
+        const response = await fetch("http://localhost:5000/movie", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 
         console.log(response);
@@ -22,55 +22,59 @@ const InputPerson = () => {
 
     return (
         <Fragment>
-            <h1 className="text-center my-5">Add Person</h1>
+            <h1 className="text-center my-5">Add Movie</h1>
             <form onSubmit={handleSubmit}>
             <div className="form-group my-3">
-                <label>Firstname</label>
+                <label>Parent Movie</label>
                     <input 
                         className="form-control"
                         type="text" 
-                        name="firstName" 
-                        value={inputs.firstName || ""} 
+                        name="number" 
+                        value={inputs.parentMovie || ""} 
                         onChange={handleChange}
                     />
+                
             </div>
             <div className="form-group my-3">
-                <label>Lastname</label>
+                <label>Title</label>
                     <input 
                         className="form-control"
+                        lassName="form-control"
                         type="text" 
-                        name="lastName" 
-                        value={inputs.lastName || ""} 
-                        onChange={handleChange}
-                    />  
-            </div>
-            <div className="form-group my-3">
-                <label>Birthday</label>
-                    <input 
-                        className="form-control"
-                        type="text" 
-                        name="birthday" 
-                        value={inputs.birthday || ""} 
+                        name="title" 
+                        value={inputs.title || ""} 
                         onChange={handleChange}
                     />
+                
             </div>
             <div className="form-group my-3">
-                <label>Sex</label>
-                    <input 
-                        className="form-control"
-                        type="number" 
-                        name="sex" 
-                        value={inputs.sex || ""} 
-                        onChange={handleChange}
-                    />
-            </div>
-            <div className="form-group my-3">
-                <label>CV</label>
+                <label>Release Year</label>
                     <input 
                         className="form-control"
                         type="text" 
-                        name="cv" 
-                        value={inputs.cv || ""} 
+                        name="releaseYear" 
+                        value={inputs.releaseYear || ""} 
+                        onChange={handleChange}
+                    />
+                
+            </div>
+            <div className="form-group my-3">
+                <label>Required Age</label>
+                    <input 
+                    className="form-control"
+                    type="number" 
+                    name="requiredAge" 
+                    value={inputs.requiredAge || ""} 
+                    onChange={handleChange}
+                    /> 
+            </div>
+            <div className="form-group my-3">
+                <label>Production Country</label>
+                    <input 
+                        className="form-control"
+                        type="text" 
+                        name="productionCountry" 
+                        value={inputs.productionCountry || ""} 
                         onChange={handleChange}
                     />
             </div>
@@ -80,4 +84,4 @@ const InputPerson = () => {
     );
 }
 
-export default InputPerson;
+export default InputMovie;
