@@ -26,7 +26,7 @@ const SetUser = () => {
             var tmpUserName = window.sessionStorage.getItem('username');
             console.log(`Username: ${tmpUserName}`);
             if (!tmpUserName) {
-                document.getElementById('login').innerHTML = 'Loginresers';
+                document.getElementById('login').innerHTML = 'Login';
             } else {
                 document.getElementById('login').innerHTML = `Logged in as ${tmpUserName}`;
             }
