@@ -10,7 +10,7 @@ cd server
 nodemon run
 =======
 # AMD-Project WS21/22
-A simple movie management system was implemented in PostgreSQL by Rober Schulz and Lucas Schmutzler.
+A simple movie management system implemented in PostgreSQL by Rober Schulz and Lucas Schmutzler.
 
 ## Requirements
 - PostgreSQL
