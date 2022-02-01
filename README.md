@@ -1,16 +1,5 @@
-<<<<<<< Updated upstream
-# AMD-Project
- 
-Run the client:
-cd client
-npm start
-
-Run the server:
-cd server
-nodemon run
-=======
 # AMD-Project WS21/22
-A simple movie management system implemented in PostgreSQL by Rober Schulz and Lucas Schmutzler.
+A simple movie management system was implemented in PostgreSQL by Rober Schulz and Lucas Schmutzler.
 
 ## Requirements
 - PostgreSQL
@@ -60,4 +49,3 @@ SERVER_PORT="5000"
 
 3. Launch the client using `npm start`
 The frontend will be accessible from the browser at `http://localhost:3000/`.
->>>>>>> Stashed changes
