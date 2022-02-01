@@ -32,7 +32,7 @@ SERVER_PORT="5000"
 The server should reply with 'Server has started on port `SERVER_PORT`' if it successfully launched.
 
 # Client
-The client acts as simple frontend to interact with the database database.
+The client acts as a simple frontend to interact with the database.
 
 # How to run the client?
 1. Navigate to the clients' directory.

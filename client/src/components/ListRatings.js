@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import EditTodo from "./EditTodo"; //todo: edit functionallity using modal
+//import EditTodo from "./EditTodo"; //todo: edit functionallity using modal
 
 const ListRatings = () => {
 
@@ -41,10 +41,9 @@ const ListRatings = () => {
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">User ID</th>
+                    <th scope="col">Username</th>
                     <th scope="col">Movie ID</th>
                     <th scope="col">Rating</th>
-                    <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -53,10 +52,9 @@ const ListRatings = () => {
                     ratings.map(rating => (
                         <tr key={rating.id}>
                             <td>{rating.id}</td>
-                            <td>{rating.user_id}</td>
+                            <td>{rating.user_name}</td>
                             <td>{rating.movie_id}</td>
                             <td>{rating.rating}</td>
-                            <td>Todo Edit Button</td>
                             <td><button className="btn btn-danger" onClick={() => deleteRating(rating.id)}>Delete</button></td>
 
                         </tr>

@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import EditTodo from "./EditTodo";
+import EditPerson from "./EditPerson";
 
 const ListPersons = () => {
 
@@ -47,6 +47,7 @@ const ListPersons = () => {
                     <th scope="col">Birthday</th>
                     <th scope="col">Sex</th>
                     <th scope="col">CV</th>
+                    <th scope="col">Roles</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -59,9 +60,10 @@ const ListPersons = () => {
                             <td>{person.first_name}</td>
                             <td>{person.last_name}</td>
                             <td>{person.birthday}</td>
-                            <td>{person.sex}</td>
+                            <td>{person.sex_as_expression}</td>
                             <td>{person.cv}</td>
-                            <td>Todo Edit Button</td>
+                            <td>{person.roles}</td>
+                            <td><EditPerson person={person} /></td>
                             <td><button className="btn btn-danger" onClick={() => deletePerson(person.id)}>Delete</button></td>
 
                         </tr>

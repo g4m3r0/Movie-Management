@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Movie from './pages/Movie';
+import Rating from './pages/Rating';
 import Suggest from './pages/Suggest';
 import Person from './pages/Person';
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/movie" element={<Movie />}/>
+            <Route path="/rating" element={<Rating />}/>
             <Route path="/suggest" element={<Suggest />}/>
             <Route path="/person" element={<Person />}/>
           </Routes>

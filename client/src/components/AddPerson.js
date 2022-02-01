@@ -8,11 +8,11 @@ const InputPerson = () => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
-      }
+    }
     
       const handleSubmit = async event => {
         event.preventDefault();
-        
+
         const response = await fetch("http://localhost:5000/person", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 

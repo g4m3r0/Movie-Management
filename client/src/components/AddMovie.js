@@ -29,7 +29,7 @@ const InputMovie = () => {
                     <input 
                         className="form-control"
                         type="text" 
-                        name="number" 
+                        name="parentMovie"
                         value={inputs.parentMovie || ""} 
                         onChange={handleChange}
                     />
@@ -39,7 +39,6 @@ const InputMovie = () => {
                 <label>Title</label>
                     <input 
                         className="form-control"
-                        lassName="form-control"
                         type="text" 
                         name="title" 
                         value={inputs.title || ""} 
