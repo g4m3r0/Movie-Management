@@ -3,8 +3,9 @@ import React, { Fragment, useState } from "react";
 const EditMovie = ({movie}) => {
     const editMovie = async () => {
         try {
-            
-            const res = await fetch("http://localhost:5000/movie", {method: "PUT", headers: { "Content-Type": "application/json" },
+            console.log('Inputs:');
+            console.log(inputs);
+            const res = await fetch("http://localhost:5000/movie/" + movie.id, {method: "PUT", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(inputs)});
     
             console.log(res);
@@ -37,7 +38,26 @@ const EditMovie = ({movie}) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <input type="text" className="form-control" value={movie.title} onChange={handleChange}></input>
+                            <div className="form-group my-3">
+                                <label>Parent Movie</label>
+                                <input type="number" name="parentMovie" className="form-control" placeholder={movie.parent_movie} value={inputs.parent_movie} onChange={handleChange}></input>
+                            </div>
+                            <div className="form-group my-3">
+                                <label>Title</label>
+                                <input type="text" name="title" className="form-control" placeholder={movie.title} value={inputs.tile} onChange={handleChange}></input>
+                            </div>
+                            <div className="form-group my-3">
+                                <label>Release Year</label>
+                                <input type="number" name="releaseYear" className="form-control" placeholder={movie.release_year} value={inputs.release_year} onChange={handleChange}></input>
+                            </div>
+                            <div className="form-group my-3">
+                                <label>Required Age</label>
+                                <input type="number" name="requiredAge" className="form-control" placeholder={movie.required_age} value={inputs.required_age} onChange={handleChange}></input>
+                            </div>
+                            <div className="form-group my-3">
+                                <label>Production Country</label>
+                                <input type="text" name="productionCountry" className="form-control" placeholder={movie.production_country} value={inputs.production_country} onChange={handleChange}></input>
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
