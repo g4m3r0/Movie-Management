@@ -17,7 +17,7 @@ const InputPerson = () => {
             body: JSON.stringify(inputs)});
 
         console.log(response);
-        window.location = "/";
+        window.location = "/person";
       }
 
     return (
