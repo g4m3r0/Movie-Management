@@ -25,11 +25,17 @@ const SetUser = () => {
             //todo check if user exists?
             var tmpUserName = window.sessionStorage.getItem('username');
             console.log(`Username: ${tmpUserName}`);
-            if (!tmpUserName) {
+            if (tmpUserName == null || tmpUserName == undefined || tmpUserName == 'undefined') {
                 document.getElementById('login').innerHTML = 'Login';
             } else {
                 document.getElementById('login').innerHTML = `Logged in as ${tmpUserName}`;
             }
+        }
+
+        const logout = () => {
+            window.sessionStorage.removeItem("username");
+            console.log("Logged out!");
+            window.location = "/";
         }
 
     return (
@@ -47,6 +53,7 @@ const SetUser = () => {
                     />
                 </div>
                 <input className="btn btn-success" type="submit" />
+                <button className="mx-5 btn btn-danger" onClick={logout}>Logout</button>
             </form>
         </Fragment>
     );
