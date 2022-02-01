@@ -78,6 +78,8 @@ app.delete("/person/:id", async(req, res) => {
         res.json("Person was deleted!");
 
     } catch (error) {
+        //res.json("Person was deleted!");
+        //res.json(error.message);
         console.error(error);
     }
 });
@@ -234,4 +236,106 @@ app.get("/suggest/:username", async(req, res) => {
 
 app.listen(port, () => {
     console.log("Server has started on port " + port);
+});
+
+
+// Add genre [mm_genre]
+app.post("/genre", async(req, res) => {
+    try {
+        const { genreName } = req.body;
+        const newGenre = await pool.query(
+            "Call create_or_update_genre(null, $1)", [genreName]);
+           
+
+        // Return the DB rows
+        res.json(newGenre.rows[0]);
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+// Update genre
+app.put("/genre/:id", async(req, res) => {
+    try {
+        const {id} = req.params;
+        const {genreName} = req.body;
+
+        const updateGenre = await pool.query(
+            "Call create_or_update_genre($1, $2)", [id, genreName]);
+
+        res.json("Rating was updated!");
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+// Get genre
+app.get("/genre", async(req, res) => {
+    try {
+        const allGenres = await pool.query("SELECT * FROM mm_genre");
+
+        res.json(allGenres.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+// Delete genre
+app.delete("/genre/:id", async(req, res) => {
+    try {
+        const {id} = req.params;
+        const deleteGenre = await pool.query("DELETE FROM mm_genre WHERE id = $1", [id]);
+    } catch (error) {
+        //res.json("Person was deleted!");
+        //res.json(error.message);
+        console.error(error);
+    }
+});
+
+// Get genre relation
+app.get("/genrerelation", async(req, res) => {
+    try {
+        const allGenreRelations = await pool.query("SELECT * FROM genre_view");
+
+        res.json(allGenreRelations.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+// Delete genre relation
+app.delete("/genrerelation/:id", async(req, res) => {
+    try {
+        const {id} = req.params;
+        const deleteGenreRelation = await pool.query("DELETE FROM mm_genre_relation WHERE id = $1", [id]);
+    } catch (error) {
+        //res.json("Person was deleted!");
+        //res.json(error.message);
+        console.error(error);
+    }
+});
+
+// Get role
+app.get("/role", async(req, res) => {
+    try {
+        const allGenres = await pool.query("SELECT * FROM mm_role");
+
+        res.json(allGenres.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+// Delete gerolenre
+app.delete("/role/:id", async(req, res) => {
+    try {
+        const {id} = req.params;
+        const deleteGenre = await pool.query("DELETE FROM mm_role WHERE id = $1", [id]);
+    } catch (error) {
+        //res.json("Person was deleted!");
+        //res.json(error.message);
+        console.error(error);
+    }
 });
