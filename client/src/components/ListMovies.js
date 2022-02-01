@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import EditTodo from "./EditTodo"; //todo: edit functionallity using modal
+
+import EditMovie from "./EditMovie";
+import EditRating from "./RateMovie";
 
 const ListMovies = () => {
 
@@ -14,6 +16,23 @@ const ListMovies = () => {
     }
 
     async function deleteMovie(id){
+        try {
+
+            // send request to the backend to delete the record
+            const res = await fetch(`http://localhost:5000/movie/${id}`, {
+                method: "DELETE"
+            });
+
+            // remove item from the table
+            setMovies(movies.filter(movie => movie.id != id));
+            console.log(res);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    async function rateMovie(id){
         try {
 
             // send request to the backend to delete the record
@@ -47,6 +66,7 @@ const ListMovies = () => {
                     <th scope="col">Release Year</th>
                     <th scope="col">Required Age</th>
                     <th scope="col">Production Country</th>
+                    <th scope="col">Rate</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -61,7 +81,8 @@ const ListMovies = () => {
                             <td>{movie.release_year}</td>
                             <td>{movie.required_age}</td>
                             <td>{movie.production_country}</td>
-                            <td>Todo Edit Button</td>
+                            <td><EditRating movie={movie} /></td>
+                            <td><EditMovie movie={movie} /></td>
                             <td><button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</button></td>
 
                         </tr>
