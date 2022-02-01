@@ -17,9 +17,9 @@ app.use(express.json());
 app.post("/person", async(req, res) => {
     try {
         const { firstName, lastName, birthday, sex, cv } = req.body;
-        const newPerson = await pool.query(
-            "INSERT INTO mm_person (first_name, last_name, birthday, sex, cv) VALUES($1, $2, $3, $4, $5) RETURNING *",
-            [firstName, lastName, birthday, sex, cv]);
+        const newPerson = await pool.query("CALL create_or_update_person(null, $1, $2, $3, $4, $5)", [firstName, lastName, birthday, sex, cv]);
+            //"INSERT INTO mm_person (first_name, last_name, birthday, sex, cv) VALUES($1, $2, $3, $4, $5) RETURNING *",
+            //[firstName, lastName, birthday, sex, cv]);
 
         // Return the DB rows
         res.json(newPerson.rows[0]);
@@ -32,7 +32,7 @@ app.post("/person", async(req, res) => {
 // Get film related person
 app.get("/person", async(req, res) => {
     try {
-        const allPersons = await pool.query("SELECT * FROM mm_person");
+        const allPersons = await pool.query("SELECT * FROM person_view");
 
         res.json(allPersons.rows);
     } catch (error) {
@@ -43,7 +43,7 @@ app.get("/person", async(req, res) => {
 app.get("/person/:id", async(req, res) => {
     try {
         const {id} = req.params;
-        const person = await pool.query("SELECT * FROM mm_person WHERE id = $1", [id]);
+        const person = await pool.query("SELECT * FROM person_view WHERE id = $1", [id]);
 
         res.json(todo.rows);
 
@@ -58,8 +58,8 @@ app.put("/person/:id", async(req, res) => {
         const {id} = req.params;
         const {firstName, lastName, birthday, sex, cv} = req.body;
 
-        const updatePerson = await pool.query("UPDATE mm_person SET first_name = $1, last_name = $2, birthday = $3, sex = $4, cv = $5  WHERE id = $6", [firstName, lastName, birthday, sex, cv, id]);
-        
+        const updatePerson = await pool.query("CALL create_or_update_person($1, $2, $3, $4, $5, $6)", [firstName, lastName, birthday, sex, cv]);
+        //UPDATE mm_person SET first_name = $1, last_name = $2, birthday = $3, sex = $4, cv = $5  WHERE id = $6
         res.json("Person was updated!");
 
     } catch (error) {
@@ -85,9 +85,9 @@ app.delete("/person/:id", async(req, res) => {
 app.post("/movie", async(req, res) => {
     try {
         const { parentMovie, title, releaseYear, requiredAge, productionCountry } = req.body;
-        const newMovie = await pool.query(
-            "INSERT INTO mm_movie (parent_movie, title, release_year, required_age, production_country) VALUES($1, $2, $3, $4, $5) RETURNING *",
-            [parentMovie, title, releaseYear, requiredAge, productionCountry]);
+        const newMovie = await pool.query("CALL create_or_update_movie(null, $1, $2, $3, $4, $5)", [parentMovie, title, releaseYear, requiredAge, productionCountry]);
+            //"INSERT INTO mm_movie (parent_movie, title, release_year, required_age, production_country) VALUES($1, $2, $3, $4, $5) RETURNING *",
+            //[parentMovie, title, releaseYear, requiredAge, productionCountry]);
 
         // Return the DB rows
         res.json(newMovie.rows[0]);
@@ -100,7 +100,7 @@ app.post("/movie", async(req, res) => {
 // Get movies
 app.get("/movie", async(req, res) => {
     try {
-        const allMovies = await pool.query("SELECT * FROM mm_movie");
+        const allMovies = await pool.query("SELECT * FROM movie_view");
 
         res.json(allMovies.rows);
     } catch (error) {
@@ -111,7 +111,7 @@ app.get("/movie", async(req, res) => {
 app.get("/movie/:id", async(req, res) => {
     try {
         const {id} = req.params;
-        const movie = await pool.query("SELECT * FROM mm_movie WHERE id = $1", [id]);
+        const movie = await pool.query("SELECT * FROM movie_view WHERE id = $1", [id]);
 
         res.json(movie.rows);
 
@@ -125,7 +125,9 @@ app.put("/movie/:id", async(req, res) => {
     try {
         const {id} = req.params;
         const {parentMovie, title, releaseYear, requiredAge, productionCountry} = req.body;
-        const updateMovie = await pool.query("UPDATE mm_movie SET parent_movie = $1, title = $2, release_year = $3, required_age = $4, production_country = $5  WHERE id = $6", [parentMovie, title, releaseYear, requiredAge, productionCountry]);
+        console.log(req.body);
+        const updateMovie = await pool.query("CALL create_or_update_movie($1, $2, $3, $4, $5, $6)", [id, parentMovie, title, releaseYear, requiredAge, productionCountry]);
+        //UPDATE mm_movie SET parent_movie = $1, title = $2, release_year = $3, required_age = $4, production_country = $5  WHERE id = $6", [parentMovie, title, releaseYear, requiredAge, productionCountry]);
         
         res.json("Movie was updated!");
 
@@ -150,10 +152,11 @@ app.delete("/movie/:id", async(req, res) => {
 // Add rating [mm_rating]
 app.post("/rating", async(req, res) => {
     try {
-        const { userId, movieId, rating } = req.body;
+        const { username, movieId, rating } = req.body;
         const newRating = await pool.query(
-            "INSERT INTO mm_rating (user_id, movie_id, rating) VALUES($1, $2, $3) RETURNING *",
-            [userId, movieId, rating]);
+            "Call create_or_update_rating(null, $1, $2, $3)", [movieId, rating, username]);
+            //"INSERT INTO mm_rating (user_id, movie_id, rating) VALUES($1, $2, $3) RETURNING *",
+            
 
         // Return the DB rows
         res.json(newRating.rows[0]);
@@ -190,8 +193,10 @@ app.get("/rating/:id", async(req, res) => {
 app.put("/rating/:id", async(req, res) => {
     try {
         const {id} = req.params;
-        const {userId, movieId, rating} = req.body;
-        const updateRating = await pool.query("UPDATE mm_rating SET user_id = $1, movie_id = $2, rating = $3 WHERE id = $6", [userId, movieId, rating]);
+        const {username, movieId, rating} = req.body;
+        const updateRating = await pool.query(
+            "Call create_or_update_rating($1, $2, $3, $4)", [id, movieId, rating, username]);
+            //"UPDATE mm_rating SET user_id = $1, movie_id = $2, rating = $3 WHERE id = $6", [userId, movieId, rating]);
         
         res.json("Rating was updated!");
 
@@ -214,12 +219,12 @@ app.delete("/rating/:id", async(req, res) => {
 });
 
 // Get suggestion
-app.get("/suggest", async(req, res) => {
+app.get("/suggest/:username", async(req, res) => {
     try {
-        // Todo
-        const allMovies = await pool.query("SELECT * FROM mm_movie");
+        const {username} = req.params;
+        const suggestedMovies = await pool.query("SELECT suggest_movie($1, 0)", [username]);
 
-        res.json(allMovies.rows);
+        res.json(suggestedMovies.rows);
     } catch (error) {
         console.error(error);
     }
