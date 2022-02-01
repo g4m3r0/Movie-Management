@@ -58,7 +58,9 @@ app.put("/person/:id", async(req, res) => {
         const {id} = req.params;
         const {firstName, lastName, birthday, sex, cv} = req.body;
 
-        const updatePerson = await pool.query("CALL create_or_update_person($1, $2, $3, $4, $5, $6)", [firstName, lastName, birthday, sex, cv]);
+        console.log(req.body);
+
+        const updatePerson = await pool.query("CALL create_or_update_person($1, $2, $3, $4, $5, $6)", [id, firstName, lastName, birthday, sex, cv]);
         //UPDATE mm_person SET first_name = $1, last_name = $2, birthday = $3, sex = $4, cv = $5  WHERE id = $6
         res.json("Person was updated!");
 
