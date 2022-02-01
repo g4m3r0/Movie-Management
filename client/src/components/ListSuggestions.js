@@ -8,14 +8,14 @@ const ListSuggestions = () => {
 
     async function getSuggestions() {
 
-        var username = window.sessionStorage.getItem('username');
-
-        if (!username) {
+        var tmpUserName = window.sessionStorage.getItem('username');
+        console.log(`Username: ${tmpUserName}`);
+        if (tmpUserName == null || tmpUserName == undefined || tmpUserName == 'undefined') {
             alert('Not logged in! Please login first!');
-            return;
+            window.location = "/";
         }
 
-        const res = await fetch("http://localhost:5000/suggest/" + username);
+        const res = await fetch("http://localhost:5000/suggest/" + tmpUserName);
         const suggestIdArray = await res.json();
 
         const {suggest_movie} = suggestIdArray[0];
