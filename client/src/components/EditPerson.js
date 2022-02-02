@@ -25,7 +25,7 @@ const EditPerson = ({person}) => {
     }
 
     return (
-        <Fragment> 
+        <Fragment>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#editPerson${person.id}`}>
             Edit
             </button>
