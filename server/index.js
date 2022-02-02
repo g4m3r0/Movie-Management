@@ -287,12 +287,30 @@ app.delete("/genre/:id", async(req, res) => {
     try {
         const {id} = req.params;
         const deleteGenre = await pool.query("DELETE FROM mm_genre WHERE id = $1", [id]);
+
+        res.json("Genre was deleted!");
+
     } catch (error) {
-        //res.json("Person was deleted!");
-        //res.json(error.message);
         console.error(error);
     }
 });
+
+// Add genre relation
+app.post("/genrerelation", async(req, res) => {
+    try {
+        const { movieId, genreId } = req.body;
+        const newRole = await pool.query(
+            "Call create_or_update_genre_relation($1, $2)", [movieId, genreId]);
+           
+
+        // Return the DB rows
+        res.json(newRole.rows[0]);
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 
 // Get genre relation
 app.get("/genrerelation", async(req, res) => {
@@ -310,9 +328,26 @@ app.delete("/genrerelation/:id", async(req, res) => {
     try {
         const {id} = req.params;
         const deleteGenreRelation = await pool.query("DELETE FROM mm_genre_relation WHERE id = $1", [id]);
+
+        res.json("Genre Relation was deleted!");
     } catch (error) {
-        //res.json("Person was deleted!");
-        //res.json(error.message);
+        console.error(error);
+    }
+});
+
+
+// Add role
+app.post("/role", async(req, res) => {
+    try {
+        const { personId, movieId, role } = req.body;
+        const newRole = await pool.query(
+            "Call create_or_update_role($1, $2, $3)", [personId, movieId, role]);
+           
+
+        // Return the DB rows
+        res.json(newRole.rows[0]);
+
+    } catch (error) {
         console.error(error);
     }
 });
@@ -328,14 +363,12 @@ app.get("/role", async(req, res) => {
     }
 });
 
-// Delete gerolenre
+// Delete role
 app.delete("/role/:id", async(req, res) => {
     try {
         const {id} = req.params;
         const deleteGenre = await pool.query("DELETE FROM mm_role WHERE id = $1", [id]);
     } catch (error) {
-        //res.json("Person was deleted!");
-        //res.json(error.message);
         console.error(error);
     }
 });
