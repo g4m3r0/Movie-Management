@@ -29,7 +29,7 @@ const InputGenre = () => {
                         <input 
                             className="form-control"
                             type="text" 
-                            name="parentGenre"
+                            name="genreName"
                             value={inputs.genreName || ""} 
                             onChange={handleChange}
                         />

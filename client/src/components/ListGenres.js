@@ -19,9 +19,8 @@ const ListGenre = () => {
                 method: "DELETE"
             });
 
-            // remove item from the table
-            setGenres(genres.filter(genre => genre.id != id));
             console.log(res);
+            window.location = "/genre";
         } catch (error) {
             console.log(error.message);
         }
