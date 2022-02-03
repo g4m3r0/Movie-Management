@@ -1,16 +1,15 @@
 import React, { Fragment, useState } from "react";
-import { handleError } from './HandleError'
+import { handleError, checkLogin } from './Helpers'
 
 const EditRating = ({movie}) => {
     const editRating = async (movieId) => {
         try {
-            var username = window.sessionStorage.getItem('username');
-
-            if (!username) {
+            if (!checkLogin()) {
                 alert('Not logged in! Please login first!');
                 return;
             }
 
+            var username = window.sessionStorage.getItem('username');
             const body = {username, movieId, rating};
 
             const response = await fetch(`http://localhost:5000/rating`, {
@@ -43,11 +42,12 @@ const EditRating = ({movie}) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Rate Movie (ID: {movie.id})</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Rate Movie {movie.title}</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={e => setRating(movie.rating)}></button>
                         </div>
                         <div className="modal-body">
-                            <input type="text" className="form-control" value={rating} onChange={e => setRating(e.target.value)}></input>
+                            <p>Rate a movie from 1 (Bad) to 5 (Awesome).</p>
+                            <input type="text" className="form-control" value={rating || 5} onChange={e => setRating(e.target.value)}></input>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={e => setRating(movie.rating)}>Close</button>
