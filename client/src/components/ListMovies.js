@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './HandleError'
+import { handleError } from './Helpers'
 
 import EditMovie from "./EditMovie";
 import EditRating from "./RateMovie";

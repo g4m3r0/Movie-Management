@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { handleError } from './HandleError'
+import { handleError } from './Helpers'
 
 const EditMovie = ({movie}) => {
     const editMovie = async () => {
@@ -11,8 +11,8 @@ const EditMovie = ({movie}) => {
             console.log(responseJson);
             handleError(responseJson);
         
-            if(!responseJson.includes("Error:")){
-                window.location = "/movie";
+            if(!responseJson.includes('Error:')){
+                window.location = '/movie';
             }
         } catch (error) {
             console.log(error.message);
@@ -37,7 +37,7 @@ const EditMovie = ({movie}) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Edit Movie (ID: {movie.id})</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Movie {movie.title}</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">

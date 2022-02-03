@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { handleError } from './HandleError'
+import { handleError } from './Helpers'
 
 const InputRating = () => {
 

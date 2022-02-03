@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ListGenreRelation from "../components/ListGenreRelation";
 import InputGenreRelation from "../components/AddGenreRelation";
 
-class Suggest extends Component {
+class GenreRelation extends Component {
   render() {
     return (
       <div className="container">
@@ -13,4 +13,4 @@ class Suggest extends Component {
   }
 }
  
-export default Suggest;
+export default GenreRelation;
