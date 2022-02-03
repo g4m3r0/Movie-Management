@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { handleError } from './HandleError'
 
 import EditMovie from "./EditMovie";
 import EditRating from "./RateMovie";
@@ -19,29 +20,16 @@ const ListMovies = () => {
         try {
 
             // send request to the backend to delete the record
-            const res = await fetch(`http://localhost:5000/movie/${id}`, {
+            const response = await fetch(`http://localhost:5000/movie/${id}`, {
                 method: "DELETE"
             });
 
             // remove item from the table
             setMovies(movies.filter(movie => movie.id != id));
 
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    async function rateMovie(id){
-        try {
-
-            // send request to the backend to delete the record
-            const res = await fetch(`http://localhost:5000/movie/${id}`, {
-                method: "DELETE"
-            });
-
-            // remove item from the table
-            setMovies(movies.filter(movie => movie.id != id));
-
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
         } catch (error) {
             console.log(error.message);
         }

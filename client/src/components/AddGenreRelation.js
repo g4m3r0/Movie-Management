@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { handleError } from './HandleError'
 
 const InputGenreRelation = () => {
 
@@ -16,8 +17,13 @@ const InputGenreRelation = () => {
         const response = await fetch("http://localhost:5000/genrerelation", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 
-        console.log(response);
-        window.location = "/genrerelation";
+        const responseJson = await response.json();
+        console.log(responseJson);
+        handleError(responseJson);
+
+        if(!responseJson.includes("Error:")){
+            window.location = "/genrerelation";
+        }
       }
 
     return (

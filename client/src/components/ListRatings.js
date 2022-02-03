@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-//import EditTodo from "./EditTodo"; //todo: edit functionallity using modal
+import { handleError } from './HandleError'
 
 const ListRatings = () => {
 
@@ -17,13 +17,16 @@ const ListRatings = () => {
         try {
 
             // send request to the backend to delete the record
-            const res = await fetch(`http://localhost:5000/rating/${id}`, {
+            const response = await fetch(`http://localhost:5000/rating/${id}`, {
                 method: "DELETE"
             });
 
             // remove item from the table
             setRatings(ratings.filter(rating => rating.id != id));
-            console.log(res);
+
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
         } catch (error) {
             console.log(error.message);
         }

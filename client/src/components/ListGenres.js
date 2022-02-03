@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { handleError } from './HandleError'
 
 const ListGenre = () => {
 
@@ -15,12 +16,17 @@ const ListGenre = () => {
     async function deleteGenre(id){
         try {
             // send request to the backend to delete the record
-            const res = await fetch(`http://localhost:5000/genre/${id}`, {
+            const response = await fetch(`http://localhost:5000/genre/${id}`, {
                 method: "DELETE"
             });
 
-            console.log(res);
-            window.location = "/genre";
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
+        
+            if(!responseJson.includes("Error:")){
+                window.location = "/genre";
+            }
         } catch (error) {
             console.log(error.message);
         }

@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { handleError } from './HandleError'
 
 const ListRoles = () => {
 
@@ -16,13 +17,16 @@ const ListRoles = () => {
         try {
 
             // send request to the backend to delete the record
-            const res = await fetch(`http://localhost:5000/role/${id}`, {
+            const response = await fetch(`http://localhost:5000/role/${id}`, {
                 method: "DELETE"
             });
 
             // remove item from the table
             setRoles(roles.filter(roles => roles.id != id));
-            console.log(res);
+
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
         } catch (error) {
             console.log(error.message);
         }

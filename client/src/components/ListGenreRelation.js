@@ -1,28 +1,33 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { handleError } from './HandleError'
 
 const ListGenreRelation = () => {
 
     const [genres, setGenres] = useState([]);
 
     async function getGenres() {
-        const res = await fetch("http://localhost:5000/genrerelation");
+        const response = await fetch("http://localhost:5000/genrerelation");
 
-        const genreArray = await res.json();
+        const genreArray = await response.json();
         setGenres(genreArray);
         console.log(genreArray);
+        handleError(genreArray);
     }
 
     async function deleteGenre(id){
         try {
 
             // send request to the backend to delete the record
-            const res = await fetch(`http://localhost:5000/genrerelation/${id}`, {
+            const response = await fetch(`http://localhost:5000/genrerelation/${id}`, {
                 method: "DELETE"
             });
 
             // remove item from the table
             setGenres(genres.filter(genre => genre.id != id));
-            console.log(res);
+
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
         } catch (error) {
             console.log(error.message);
         }

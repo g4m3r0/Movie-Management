@@ -1,16 +1,19 @@
 import React, { Fragment, useState } from "react";
+import { handleError } from './HandleError'
 
 const EditMovie = ({movie}) => {
     const editMovie = async () => {
         try {
-            console.log('Inputs:');
-            console.log(inputs);
-            const res = await fetch("http://localhost:5000/movie/" + movie.id, {method: "PUT", headers: { "Content-Type": "application/json" },
+            const response = await fetch("http://localhost:5000/movie/" + movie.id, {method: "PUT", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(inputs)});
     
-            console.log(res);
-            window.location = "/movie";
-
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
+        
+            if(!responseJson.includes("Error:")){
+                window.location = "/movie";
+            }
         } catch (error) {
             console.log(error.message);
         }

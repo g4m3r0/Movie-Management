@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-
-// todo: everything
+import { handleError } from './HandleError'
 
 const ListSuggestions = () => {
 
@@ -25,6 +24,7 @@ const ListSuggestions = () => {
 
         setSuggestions(suggestArray);
         console.log(suggestArray);
+        handleError(suggestArray);
     }
 
     // Runs any time the component is rendered
