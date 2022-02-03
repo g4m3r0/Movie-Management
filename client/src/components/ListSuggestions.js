@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './HandleError'
+import { handleError } from './Helpers'
 
 const ListSuggestions = () => {
 
@@ -16,8 +16,15 @@ const ListSuggestions = () => {
 
         const res = await fetch("http://localhost:5000/suggest/" + tmpUserName);
         const suggestIdArray = await res.json();
-
         const {suggest_movie} = suggestIdArray[0];
+
+        if(!suggest_movie){
+            // User not found
+            const message = "Error: User not found!";
+            console.log(message);
+            handleError(message);
+            window.location = "/";
+        }
 
         const movieRes = await fetch("http://localhost:5000/movie/" + suggest_movie);
         const suggestArray = await movieRes.json();
@@ -34,7 +41,7 @@ const ListSuggestions = () => {
 
     return (
         <Fragment>
-            <h1 className="text-center my-5">List Suggested Movie</h1>
+            <h1 className="text-center my-5">List Suggested Movie (User: {window.sessionStorage.getItem('username')})</h1>
             <table className="table mt-5">
             <thead>
                 <tr>
