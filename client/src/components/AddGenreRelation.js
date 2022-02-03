@@ -1,9 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { handleError } from './Helpers'
 
 const InputGenreRelation = () => {
 
     const [inputs, setInputs] = useState({});
+    const [genres, setGenres] = useState([]);
+    const [movies, setMovies] = useState([]);
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -13,7 +15,7 @@ const InputGenreRelation = () => {
     
       const handleSubmit = async event => {
         event.preventDefault();
-        
+        console.log(inputs);
         const response = await fetch("http://localhost:5000/genrerelation", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 
@@ -26,29 +28,54 @@ const InputGenreRelation = () => {
         }
       }
 
+      async function getMovies() {
+            const res = await fetch("http://localhost:5000/movie");
+
+            const movieArray = await res.json();
+            setMovies(movieArray);
+            console.log(movieArray);
+        }
+
+        async function getGenres() {
+            const res = await fetch("http://localhost:5000/genre");
+    
+            const genreArray = await res.json();
+            setGenres(genreArray);
+            console.log(genreArray);
+        }
+
+        // Runs any time the component is rendered
+        useEffect(() => {
+            getMovies();
+            getGenres();
+        }, []);
+
     return (
         <Fragment>
             <h1 className="text-center my-5">Add Genre Relation</h1>
             <form onSubmit={handleSubmit}>
+               
                 <div className="form-group my-3">
-                    <label>Movie ID</label>
-                        <input 
-                            className="form-control"
-                            type="number" 
-                            name="movieId"
-                            value={inputs.movieId || ""} 
-                            onChange={handleChange}
-                        />
+                    <label>Movie</label>
+                    <select name="movieId" onChange={handleChange} className="form-select form-select-sm">
+                        <option selected disabled>
+                            Choose a Movie
+                        </option>
+                        {movies.map(movie => 
+                            <option value={movie.id}>{movie.title}</option>
+                            )}
+                    </select>
                 </div>
                 <div className="form-group my-3">
-                    <label>Genre ID</label>
-                        <input 
-                            className="form-control"
-                            type="number" 
-                            name="genreId"
-                            value={inputs.genreId || ""} 
-                            onChange={handleChange}
-                        />
+                    <label>Genre </label>
+                    <select name="genreId" onChange={handleChange} className="form-select form-select-sm">
+                        <option selected disabled>
+                            Choose a Genre
+                        </option>
+                        {genres.map(genre => 
+                            <option value={genre.id}>{genre.genre_name}</option>
+                            )}
+                    </select>
                 </div>
                 <input className="btn btn-success" type="submit" />
             </form>
