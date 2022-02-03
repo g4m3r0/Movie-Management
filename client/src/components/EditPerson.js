@@ -1,16 +1,19 @@
 import React, { Fragment, useState } from "react";
+import { handleError } from './HandleError'
 
 const EditPerson = ({person}) => {
     const editPerson = async () => {
         try {
-            console.log('Inputs:');
-            console.log(inputs);
-            const res = await fetch("http://localhost:5000/person/" + person.id, {method: "PUT", headers: { "Content-Type": "application/json" },
+            const response = await fetch("http://localhost:5000/person/" + person.id, {method: "PUT", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(inputs)});
     
-            console.log(res);
-            window.location = "/person";
-
+            const responseJson = await response.json();
+            console.log(responseJson);
+            handleError(responseJson);
+        
+            if(!responseJson.includes("Error:")){
+                window.location = "/person";
+            }
         } catch (error) {
             console.log(error.message);
         }
@@ -25,7 +28,7 @@ const EditPerson = ({person}) => {
     }
 
     return (
-        <Fragment> 
+        <Fragment>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#editPerson${person.id}`}>
             Edit
             </button>

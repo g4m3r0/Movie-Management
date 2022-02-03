@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { handleError } from './HandleError'
 
 const EditRating = ({movie}) => {
     const editRating = async (movieId) => {
@@ -12,15 +13,19 @@ const EditRating = ({movie}) => {
 
             const body = {username, movieId, rating};
 
-            const res = await fetch(`http://localhost:5000/rating`, {
+            const response = await fetch(`http://localhost:5000/rating`, {
             method: "POST", 
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)
         });
 
-        console.log(res);
-        window.location = "/movie";
-
+        const responseJson = await response.json();
+        console.log(responseJson);
+        handleError(responseJson);
+    
+        if(!responseJson.includes("Error:")){
+            window.location = "/movie";
+        }
         } catch (error) {
             console.log(error.message);
         }
