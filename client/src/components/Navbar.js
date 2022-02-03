@@ -4,7 +4,7 @@ import  { NavLink } from "react-router-dom";
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <NavLink className="navbar-brand" exact="true" to="/">Movie Management</NavLink>
+            <NavLink className="navbar-brand mx-5" exact="true" to="/">Movie Management</NavLink>
             <div className="navbar-nav ml-auto">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item"><NavLink className="nav-link" exact="true" to="/">Home</NavLink></li>
