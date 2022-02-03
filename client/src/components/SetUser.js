@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { checkLogin } from './Helpers'
 
 const SetUser = () => {
 
@@ -13,35 +14,35 @@ const SetUser = () => {
       const handleSubmit = async event => {
         event.preventDefault();
 
-        window.sessionStorage.setItem('username', inputs.userName);
-        checkLogin();
+        if(inputs.userName){
+            window.sessionStorage.setItem('username', inputs.userName);
+            checkUsername();
+        } 
       }
 
-      useEffect(() => {
-        checkLogin();
-      });
-
-      const checkLogin = () => {
-            //todo check if user exists?
-            var tmpUserName = window.sessionStorage.getItem('username');
-            console.log(`Username: ${tmpUserName}`);
-            if (tmpUserName == null || tmpUserName == undefined || tmpUserName == 'undefined') {
-                document.getElementById('login').innerHTML = 'Login';
+      const checkUsername = () => {
+            if(checkLogin()){
+                document.getElementById('login').innerHTML = `Logged in as ${window.sessionStorage.getItem('username')}`;
             } else {
-                document.getElementById('login').innerHTML = `Logged in as ${tmpUserName}`;
+                document.getElementById('login').innerHTML = 'Login';
             }
         }
 
         const logout = () => {
-            window.sessionStorage.removeItem("username");
-            console.log("Logged out!");
-            window.location = "/";
+            window.sessionStorage.removeItem('username');
+            document.getElementById('login').innerHTML = 'Login';
+            console.log('Logged out!');
+            //window.location = '/';
         }
+
+        useEffect(() => {
+            checkUsername();
+          });
 
     return (
         <Fragment>
             <h1 id="login" className="text-center my-5">Login</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="align-baseline">
                 <div className="form-group my-3">
                     <label>Username</label>
                     <input 
@@ -52,8 +53,8 @@ const SetUser = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <input className="btn btn-success" type="submit" />
-                <button className="mx-5 btn btn-danger" onClick={logout}>Logout</button>
+                <input className="btn btn-success" onClick={handleSubmit} type="submit" value="Login"/>
+                <button className="btn btn-danger mx-3" onClick={logout}>Logout</button>
             </form>
         </Fragment>
     );
