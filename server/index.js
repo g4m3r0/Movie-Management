@@ -19,9 +19,7 @@ app.post("/person", async(req, res) => {
         const { firstName, lastName, birthday, sex, cv } = req.body;
         const newPerson = await pool.query("CALL create_or_update_person(null, $1, $2, $3, $4, $5)", [firstName, lastName, birthday, sex, cv]);
 
-        // Return the DB rows
-        res.json(newPerson.rows[0]);
-
+        res.json("Person was added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -45,7 +43,7 @@ app.get("/person/:id", async(req, res) => {
         const {id} = req.params;
         const person = await pool.query("SELECT * FROM person_view WHERE id = $1", [id]);
 
-        res.json(todo.rows);
+        res.json(person.rows);
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -87,9 +85,7 @@ app.post("/movie", async(req, res) => {
         const { parentMovie, title, releaseYear, requiredAge, productionCountry } = req.body;
         const newMovie = await pool.query("CALL create_or_update_movie(null, $1, $2, $3, $4, $5)", [parentMovie, title, releaseYear, requiredAge, productionCountry]);
 
-        // Return the DB rows
-        res.json(newMovie.rows[0]);
-
+        res.json("Movie was added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -142,7 +138,6 @@ app.delete("/movie/:id", async(req, res) => {
         const deleteMovie = await pool.query("DELETE FROM mm_movie WHERE id = $1", [id]);
 
         res.json("Movie was deleted!");
-
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -156,9 +151,7 @@ app.post("/rating", async(req, res) => {
         const newRating = await pool.query(
             "Call create_or_update_rating(null, $1, $2, $3)", [movieId, rating, username]);
 
-        // Return the DB rows
-        res.json(newRating.rows[0]);
-
+        res.json("Rating was added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -199,7 +192,6 @@ app.put("/rating/:id", async(req, res) => {
             "Call create_or_update_rating($1, $2, $3, $4)", [id, movieId, rating, username]);
 
         res.json("Rating was updated!");
-
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -239,8 +231,7 @@ app.post("/genre", async(req, res) => {
         const newGenre = await pool.query(
             "Call create_or_update_genre(null, $1)", [genreName]);
            
-        // Return the DB rows
-        res.json(newGenre.rows[0]);
+        res.json("Genre was added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -267,7 +258,6 @@ app.put("/genre/:id", async(req, res) => {
 app.get("/genre", async(req, res) => {
     try {
         const allGenres = await pool.query("SELECT * FROM mm_genre");
-
         res.json(allGenres.rows);
     } catch (error) {
         res.json("Error:" + error.message);
@@ -282,7 +272,6 @@ app.delete("/genre/:id", async(req, res) => {
         const deleteGenre = await pool.query("DELETE FROM mm_genre WHERE id = $1", [id]);
 
         res.json("Genre was deleted!");
-
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -294,11 +283,9 @@ app.post("/genrerelation", async(req, res) => {
     try {
         const { movieId, genreId } = req.body;
         const newRole = await pool.query(
-            "Call create_or_update_genre_relation($1, $2)", [movieId, genreId]);
+            "Call create_or_update_genre_relation(null, $1, $2)", [movieId, genreId]);
 
-        // Return the DB rows
-        res.json(newRole.rows[0]);
-
+        res.json("Genre relation created!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -310,7 +297,6 @@ app.post("/genrerelation", async(req, res) => {
 app.get("/genrerelation", async(req, res) => {
     try {
         const allGenreRelations = await pool.query("SELECT * FROM genre_view");
-
         res.json(allGenreRelations.rows);
     } catch (error) {
         res.json("Error:" + error.message);
@@ -339,10 +325,7 @@ app.post("/role", async(req, res) => {
         const newRole = await pool.query(
             "Call create_or_update_role($1, $2, $3)", [personId, movieId, role]);
            
-
-        // Return the DB rows
-        res.json(newRole.rows[0]);
-
+        res.json("Genre Relation was added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -366,6 +349,8 @@ app.delete("/role/:id", async(req, res) => {
     try {
         const {id} = req.params;
         const deleteGenre = await pool.query("DELETE FROM mm_role WHERE id = $1", [id]);
+
+        res.json("Role was deleted!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
