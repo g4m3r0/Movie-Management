@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ListRoles from "../components/ListRoles";
 import InputRole from "../components/AddRole";
 
-class Suggest extends Component {
+class Role extends Component {
   render() {
     return (
       <div className="container">
@@ -13,4 +13,4 @@ class Suggest extends Component {
   }
 }
  
-export default Suggest;
+export default Role;

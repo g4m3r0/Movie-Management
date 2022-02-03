@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { handleError } from './HandleError'
+import { handleError } from './Helpers'
 
 const InputRole = () => {
 
@@ -21,8 +21,8 @@ const InputRole = () => {
         console.log(responseJson);
         handleError(responseJson);
     
-        if(!responseJson.includes("Error:")){
-            window.location = "/role";
+        if(!responseJson.includes('Error:')){
+            window.location = '/role';
         }
       }
 

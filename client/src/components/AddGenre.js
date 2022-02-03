@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { handleError } from './HandleError'
+import { handleError } from './Helpers'
 
 const InputGenre = () => {
 
@@ -31,7 +31,7 @@ const InputGenre = () => {
             <h1 className="text-center my-5">Add Genre</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group my-3">
-                    <label>Parent Genre</label>
+                    <label>Genre Name</label>
                         <input 
                             className="form-control"
                             type="text" 
