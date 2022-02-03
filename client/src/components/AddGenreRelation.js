@@ -62,7 +62,7 @@ const InputGenreRelation = () => {
                             Choose a Movie
                         </option>
                         {movies.map(movie => 
-                            <option value={movie.id}>{movie.title}</option>
+                            <option value={movie.id}>{movie.title + " (" + movie.release_year + ")"}</option>
                             )}
                     </select>
                 </div>
