@@ -285,7 +285,7 @@ app.post("/genrerelation", async(req, res) => {
         const newRole = await pool.query(
             "Call create_or_update_genre_relation(null, $1, $2)", [movieId, genreId]);
 
-        res.json("Genre relation created!");
+        res.json("Genre relation added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
@@ -323,9 +323,9 @@ app.post("/role", async(req, res) => {
     try {
         const { personId, movieId, role } = req.body;
         const newRole = await pool.query(
-            "Call create_or_update_role($1, $2, $3)", [personId, movieId, role]);
+            "Call create_or_update_role(null, $1, $2, $3)", [personId, movieId, role]);
            
-        res.json("Genre Relation was added!");
+        res.json("Role was added!");
     } catch (error) {
         res.json("Error:" + error.message);
         console.error(error);
