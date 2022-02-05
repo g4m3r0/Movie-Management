@@ -16,6 +16,8 @@ const InputRole = () => {
     
       const handleSubmit = async event => {
         event.preventDefault();
+
+        console.log(inputs);
         
         const response = await fetch("http://localhost:5000/role", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
@@ -46,7 +48,7 @@ const InputRole = () => {
     }
 
     async function getRoles() {
-        const res = await fetch("http://localhost:5000/role");
+        const res = await fetch("http://localhost:5000/role/distinct");
 
         const rolesArray = await res.json();
         setRoles(rolesArray);
@@ -88,7 +90,7 @@ const InputRole = () => {
                 </div>
                 <div className="form-group my-3">
                     <label>Role</label>
-                    <select name="roletodo" onChange={handleChange} className="form-select form-select-sm">
+                    <select name="role_type" onChange={handleChange} className="form-select form-select-sm">
                         <option selected disabled>
                             Choose a Role
                         </option>
@@ -96,16 +98,6 @@ const InputRole = () => {
                             <option value={role.role_type}>{role.role_type}</option>
                             )}
                     </select>
-                </div>
-                <div className="form-group my-3">
-                    <label>Role Type</label>
-                        <input 
-                            className="form-control"
-                            type="text" 
-                            name="role"
-                            value={inputs.role || ""} 
-                            onChange={handleChange}
-                        />
                 </div>
                 <input className="btn btn-success" type="submit" />
             </form>
