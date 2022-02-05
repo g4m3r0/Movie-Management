@@ -61,18 +61,19 @@ const InputPerson = () => {
                     />
             </div>
             <div className="form-group my-3">
-                <label>Sex</label>
-                    <input 
-                        className="form-control"
-                        type="number" 
-                        name="sex" 
-                        value={inputs.sex || ""} 
-                        onChange={handleChange}
-                    />
+                    <label>Sex</label>
+                        <select name="sex" onChange={handleChange} className="form-select form-select-sm">
+                            <option selected disabled>
+                                Choose a Sex
+                            </option>
+                            <option value="0">Diverse</option>
+                            <option value="1">Female</option>
+                            <option value="2">Male</option>
+                    </select>
             </div>
             <div className="form-group my-3">
                 <label>CV</label>
-                    <input 
+                    <textarea  
                         className="form-control"
                         type="text" 
                         name="cv" 
