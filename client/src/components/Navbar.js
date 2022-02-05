@@ -8,6 +8,7 @@ function Navbar() {
             <div className="navbar-nav ml-auto">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item"><NavLink className="nav-link" exact="true" to="/">Home</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" exact="true" to="/user">User</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" exact="true" to="/movie">Movie</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" exact="true" to="/genre">Genre</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" exact="true" to="/genrerelation">Genre Relation</NavLink></li>
