@@ -25,7 +25,7 @@ const ListMovies = () => {
             });
 
             // remove item from the table
-            setMovies(movies.filter(movie => movie.id != id));
+            setMovies(movies.filter(movie => movie.id !== id));
 
             const responseJson = await response.json();
             console.log(responseJson);

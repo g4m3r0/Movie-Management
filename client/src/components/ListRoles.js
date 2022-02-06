@@ -22,7 +22,7 @@ const ListRoles = () => {
             });
 
             // remove item from the table
-            setRoles(roles.filter(roles => roles.id != id));
+            setRoles(roles.filter(roles => roles.id !== id));
 
             const responseJson = await response.json();
             console.log(responseJson);
