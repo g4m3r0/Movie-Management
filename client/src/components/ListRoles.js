@@ -43,9 +43,8 @@ const ListRoles = () => {
             <table className="table mt-5">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Person ID</th>
-                    <th scope="col">Movie ID</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">Person</th>
                     <th scope="col">Role Type</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -54,9 +53,8 @@ const ListRoles = () => {
                 {
                     roles.map(roles => (
                         <tr key={roles.id}>
-                            <td>{roles.id}</td>
-                            <td>{roles.person_id}</td>
-                            <td>{roles.movie_id}</td>
+                            <td>{roles.movie_title}</td>
+                            <td>{roles.person}</td>
                             <td>{roles.role_type}</td>
                             <td><button className="btn btn-danger" onClick={() => deleteRoles(roles.id)}>Delete</button></td>
 

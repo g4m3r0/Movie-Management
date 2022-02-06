@@ -43,9 +43,8 @@ const ListRatings = () => {
             <table className="table mt-5">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Movie ID</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">User</th>
                     <th scope="col">Rating</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -54,12 +53,10 @@ const ListRatings = () => {
                 {
                     ratings.map(rating => (
                         <tr key={rating.id}>
-                            <td>{rating.id}</td>
-                            <td>{rating.user_name}</td>
-                            <td>{rating.movie_id}</td>
+                            <td>{rating.movie}</td>
+                            <td>{rating.user}</td>
                             <td>{rating.rating}</td>
                             <td><button className="btn btn-danger" onClick={() => deleteRating(rating.id)}>Delete</button></td>
-
                         </tr>
                     ))
                 }

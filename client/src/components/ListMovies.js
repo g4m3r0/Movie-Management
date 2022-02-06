@@ -46,8 +46,6 @@ const ListMovies = () => {
             <table className="table mt-5">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Parent Movie</th>
                     <th scope="col">Title</th>
                     <th scope="col">Release Year</th>
                     <th scope="col">Required Age</th>
@@ -55,6 +53,7 @@ const ListMovies = () => {
                     <th scope="col">Average Rating</th>
                     <th scope="col">Persons</th>
                     <th scope="col">Genres</th>
+                    <th scope="col">Parent Movie</th>
                     <th scope="col">Rate</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
@@ -64,15 +63,14 @@ const ListMovies = () => {
                 {
                     movies.map(movie => (
                         <tr key={movie.id}>
-                            <td>{movie.id}</td>
-                            <td>{movie.parent_movie}</td>
                             <td>{movie.title}</td>
-                            <td>{movie.release_year}</td>
+                            <td>{movie.release_year}</td>                            
                             <td>{movie.required_age}</td>
                             <td>{movie.production_country}</td>
-                            <td>{movie.average_rating}</td>
+                            <td>{Math.round(movie.average_rating * 10) / 10}</td>
                             <td>{movie.persons}</td>
                             <td>{movie.genres}</td>
+                            <td>{movie.parent_movie_title}</td>
                             <td><EditRating movie={movie} /></td>
                             <td><EditMovie movie={movie} /></td>
                             <td><button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</button></td>

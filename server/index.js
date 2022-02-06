@@ -161,7 +161,7 @@ app.post("/rating", async(req, res) => {
 // Get rating
 app.get("/rating", async(req, res) => {
     try {
-        const allRatings = await pool.query("SELECT * FROM mm_rating");
+        const allRatings = await pool.query("SELECT * FROM rating_view");
 
         res.json(allRatings.rows);
     } catch (error) {
@@ -173,7 +173,7 @@ app.get("/rating", async(req, res) => {
 app.get("/rating/:id", async(req, res) => {
     try {
         const {id} = req.params;
-        const rating = await pool.query("SELECT * FROM mm_rating WHERE id = $1", [id]);
+        const rating = await pool.query("SELECT * FROM rating_view WHERE id = $1", [id]);
 
         res.json(rating.rows);
 
@@ -215,7 +215,7 @@ app.delete("/rating/:id", async(req, res) => {
 app.get("/suggest/:username", async(req, res) => {
     try {
         const {username} = req.params;
-        const suggestedMovies = await pool.query("SELECT suggest_movie($1, 0)", [username]);
+        const suggestedMovies = await pool.query("SELECT * FROM suggest_movies($1)", [username]);
 
         res.json(suggestedMovies.rows);
     } catch (error) {
@@ -257,7 +257,7 @@ app.put("/genre/:id", async(req, res) => {
 // Get genre
 app.get("/genre", async(req, res) => {
     try {
-        const allGenres = await pool.query("SELECT * FROM mm_genre");
+        const allGenres = await pool.query("SELECT * FROM mm_genre ORDER BY genre_name ASC");
         res.json(allGenres.rows);
     } catch (error) {
         res.json("Error:" + error.message);
@@ -335,7 +335,7 @@ app.post("/role", async(req, res) => {
 // Get role
 app.get("/role", async(req, res) => {
     try {
-        const allGenres = await pool.query("SELECT * FROM mm_role");
+        const allGenres = await pool.query("SELECT * FROM role_view");
 
         res.json(allGenres.rows);
     } catch (error) {
@@ -348,7 +348,7 @@ app.get("/role", async(req, res) => {
 app.delete("/role/:id", async(req, res) => {
     try {
         const {id} = req.params;
-        const deleteGenre = await pool.query("DELETE FROM mm_role WHERE id = $1", [id]);
+        const deleteGenre = await pool.query("DELETE FROM role_view WHERE id = $1", [id]);
 
         res.json("Role was deleted!");
     } catch (error) {
