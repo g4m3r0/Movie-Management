@@ -10,7 +10,7 @@ const ListSuggestions = () => {
 
         var tmpUserName = window.sessionStorage.getItem('username');
         console.log(`Username: ${tmpUserName}`);
-        if (tmpUserName == null || tmpUserName == undefined || tmpUserName == 'undefined') {
+        if (tmpUserName === null || tmpUserName === undefined || tmpUserName === 'undefined') {
             alert('Not logged in! Please login first!');
             window.location = "/";
         }

@@ -1,6 +1,4 @@
 
-import  { NavLink } from "react-router-dom";
-
 function Footer() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mt-5 px-3">

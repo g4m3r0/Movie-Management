@@ -360,7 +360,7 @@ app.get("/role/distinct", async(req, res) => {
 app.delete("/role/:id", async(req, res) => {
     try {
         const { id } = req.params;
-        const deleteGenre = await pool.query("DELETE FROM role_view WHERE id = $1", [id]);
+        const deleteGenre = await pool.query("DELETE FROM mm_role WHERE id = $1", [id]);
 
         res.json("Role was deleted!");
     } catch (error) {
@@ -395,5 +395,5 @@ app.delete("/user/:id", async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log("Server has started on port " + port);
+    console.log("Server has started listening on port " + port);
 });

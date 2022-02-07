@@ -23,7 +23,7 @@ const ListRatings = () => {
             });
 
             // remove item from the table
-            setRatings(ratings.filter(rating => rating.id != id));
+            setRatings(ratings.filter(rating => rating.id !== id));
 
             const responseJson = await response.json();
             console.log(responseJson);
