@@ -23,7 +23,7 @@ const ListPersons = () => {
             });
 
             // remove item from the table
-            setPersons(persons.filter(person => person.id != id));
+            setPersons(persons.filter(person => person.id !== id));
 
             const responseJson = await response.json();
             console.log(responseJson);
