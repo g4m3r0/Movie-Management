@@ -7,8 +7,8 @@ class Genre extends Component {
   render() {
     return (
       <div className="container">
-        <ListGenres />
         <InputGenre />
+        <ListGenres />
       </div>
     );
   }

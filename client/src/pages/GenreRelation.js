@@ -6,8 +6,8 @@ class GenreRelation extends Component {
   render() {
     return (
       <div className="container">
-        <ListGenreRelation />
         <InputGenreRelation />
+        <ListGenreRelation />
       </div>
     );
   }

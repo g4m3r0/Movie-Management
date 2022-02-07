@@ -6,8 +6,8 @@ class Role extends Component {
   render() {
     return (
       <div className="container">
-        <ListRoles />
         <InputRole />
+        <ListRoles />
       </div>
     );
   }

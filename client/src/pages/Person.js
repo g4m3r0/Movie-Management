@@ -6,8 +6,8 @@ class Person extends Component {
   render() {
     return (
       <div className="container">
-        <ListPersons />
         <InputPerson />
+        <ListPersons />
       </div>
     );
   }
