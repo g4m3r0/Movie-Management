@@ -7,15 +7,14 @@ const InputRole = () => {
     const [inputs, setInputs] = useState({});
     const [movies, setMovies] = useState([]);
     const [persons, setPersons] = useState([]);
-    const [roles, setRoles] = useState([]);
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
-      }
+    }
     
-      const handleSubmit = async event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         console.log(inputs);
@@ -30,9 +29,9 @@ const InputRole = () => {
         if(!responseJson.includes('Error:')){
             window.location = '/role';
         }
-      }
+    }
 
-      async function getPersons() {
+    async function getPersons() {
         const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/person");
 
         const personArray = await res.json();
@@ -48,19 +47,10 @@ const InputRole = () => {
         console.log(movieArray);
     }
 
-    async function getRoles() {
-        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/role/distinct");
-
-        const rolesArray = await res.json();
-        setRoles(rolesArray);
-        console.log(rolesArray);
-    }
-
     // Runs any time the component is rendered
     useEffect(() => {
         getPersons();
         getMovies();
-        getRoles();
     }, []);
 
     return (
@@ -90,15 +80,14 @@ const InputRole = () => {
                     </select>
                 </div>
                 <div className="form-group my-3">
-                    <label>Role</label>
-                    <select name="role_type" onChange={handleChange} className="form-select form-select-sm">
-                        <option selected disabled>
-                            Choose a Role
-                        </option>
-                        {roles.map(role => 
-                            <option value={role.role_type}>{role.role_type}</option>
-                            )}
-                    </select>
+                <label>Role</label>
+                    <input 
+                        className="form-control"
+                        type="text" 
+                        name="role_type" 
+                        value={inputs.role_type || ""} 
+                        onChange={handleChange}
+                    />
                 </div>
                 <input className="btn btn-success" type="submit" />
             </form>
