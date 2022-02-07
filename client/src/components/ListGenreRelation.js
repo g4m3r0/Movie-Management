@@ -23,7 +23,7 @@ const ListGenreRelation = () => {
             });
 
             // remove item from the table
-            setGenres(genres.filter(genre => genre.id != id));
+            setGenres(genres.filter(genre => genre.id !== id));
 
             const responseJson = await response.json();
             console.log(responseJson);

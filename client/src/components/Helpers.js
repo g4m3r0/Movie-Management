@@ -7,7 +7,7 @@ export function handleError(message){
 export function checkLogin(){
     var tmpUserName = window.sessionStorage.getItem('username');
 
-    if (tmpUserName == null || tmpUserName == undefined || tmpUserName == 'undefined') {
+    if (tmpUserName === null || tmpUserName === undefined || tmpUserName === 'undefined') {
         return false;
     } else {
         return true;
