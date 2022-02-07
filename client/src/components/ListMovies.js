@@ -74,7 +74,6 @@ const ListMovies = () => {
                             <td><EditRating movie={movie} /></td>
                             <td><EditMovie movie={movie} /></td>
                             <td><button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</button></td>
-
                         </tr>
                     ))
                 }
