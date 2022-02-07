@@ -6,8 +6,8 @@ class Movie extends Component {
   render() {
     return (
       <div className="container">
-        <ListMovies />
         <InputMovie />
+        <ListMovies />
       </div>
     );
   }
