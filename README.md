@@ -19,7 +19,7 @@ The server interacts with the PostgreSQL database and provides a REST API for th
 2. Install the Node.js dependencies.
 `npm install`
 
-3. Create or change the .env file with your database configuration.
+3. Create or change the .env file with your database configuration. The file has to be placed inside the server's root dir.
 The REST API will listen on the `SERVER_PORT` on localhost.
 
 ```
@@ -47,7 +47,7 @@ The client acts as a simple frontend to interact with the database.
 2. Install the Node.js dependencies.
 `npm install`
 
-3. (Optional) Create or change the `.env` file with your server configuration.
+3. (Optional) Create or change the `.env` file with your server configuration. The file has to be placed inside the client's root dir.
 The `SERVER_PORT` specified for the client must match with the `SERVER_PORT` specified for the server.
 
 ```
