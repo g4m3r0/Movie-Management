@@ -16,26 +16,8 @@ const ListSuggestions = () => {
 
         const res = await fetch("http://localhost:5000/suggest/" + tmpUserName);
         const suggestionArray = await res.json();
-        //const suggestIdArray = await res.json();
-        //const {suggest_movie} = suggestIdArray[0];
-
-        /*if(!suggest_movie){
-            // User not found
-            const message = "Error: User not found!";
-            console.log(message);
-            handleError(message);
-            window.location = "/";
-        }*/
-
-        //const movieRes = await fetch("http://localhost:5000/movie/" + suggest_movie);
-        //const suggestArray = await movieRes.json();
-
-        //setSuggestions(suggestArray);
-        console.log(suggestionArray);
-        setSuggestions(suggestionArray);
-        //console.log(suggestArray);
-        //handleError(suggestArray);
         
+        setSuggestions(suggestionArray);
         handleError(suggestionArray);
     }
 
