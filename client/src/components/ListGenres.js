@@ -43,7 +43,6 @@ const ListGenre = () => {
             <table className="table mt-5">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Genre Name</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -52,7 +51,6 @@ const ListGenre = () => {
                 {
                     genres.map(genre => (
                         <tr key={genre.id}>
-                            <td>{genre.id}</td>
                             <td>{genre.genre_name}</td>
                             <td><button className="btn btn-danger" onClick={() => deleteGenre(genre.id)}>Delete</button></td>
                         </tr>
