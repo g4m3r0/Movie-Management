@@ -1,4 +1,6 @@
 # Movie Management
+[![BCH compliance](https://bettercodehub.com/edge/badge/g4m3r0/AMD-Project?branch=main&token=3e3451b8df2b62be79c9fc23563729f909cb3232)](https://bettercodehub.com/)
+
 **[Advanced Management of Data](https://www.tu-chemnitz.de/informatik/DVS/index.php) Term Project WS21/22**
 
 A simple movie management system implemented in PostgreSQL with a Node.js frontend by Rober Schulz and Lucas Schmutzler.
