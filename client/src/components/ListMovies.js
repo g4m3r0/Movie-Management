@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 import EditMovie from "./EditMovie";
 import EditRating from "./RateMovie";
@@ -9,7 +10,7 @@ const ListMovies = () => {
     const [movies, setMovies] = useState([]);
 
     async function getMovies() {
-        const res = await fetch("http://localhost:5000/movie");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie");
 
         const movieArray = await res.json();
         setMovies(movieArray);
@@ -20,7 +21,7 @@ const ListMovies = () => {
         try {
 
             // send request to the backend to delete the record
-            const response = await fetch(`http://localhost:5000/movie/${id}`, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie/" + id, {
                 method: "DELETE"
             });
 

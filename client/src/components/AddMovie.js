@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const InputMovie = () => {
 
@@ -13,7 +14,7 @@ const InputMovie = () => {
     }
 
     async function getMovies() {
-          const res = await fetch("http://localhost:5000/movie");
+          const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie");
   
           const movieArray = await res.json();
           setMovies(movieArray);
@@ -23,7 +24,7 @@ const InputMovie = () => {
     const handleSubmit = async event => {
         event.preventDefault();
         
-        const response = await fetch("http://localhost:5000/movie", {method: "POST", headers: { "Content-Type": "application/json" },
+        const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 
         const responseJson = await response.json();

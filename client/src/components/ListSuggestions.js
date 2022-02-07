@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const ListSuggestions = () => {
 
@@ -14,7 +15,7 @@ const ListSuggestions = () => {
             window.location = "/";
         }
 
-        const res = await fetch("http://localhost:5000/suggest/" + tmpUserName);
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/suggest/" + tmpUserName);
         const suggestionArray = await res.json();
         
         setSuggestions(suggestionArray);
