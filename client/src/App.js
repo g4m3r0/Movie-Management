@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
+import User from './pages/User';
 
 import Movie from './pages/Movie';
 import Genre from './pages/Genre';
@@ -26,6 +27,7 @@ class App extends Component {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />}/>
+            <Route path="/user" element={<User />}/>
             <Route path="/movie" element={<Movie />}/>
             <Route path="/genre" element={<Genre />}/>
             <Route path="/genrerelation" element={<GenreRelation />}/>
