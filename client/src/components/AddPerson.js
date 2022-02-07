@@ -53,13 +53,13 @@ const InputPerson = () => {
             </div>
             <div className="form-group my-3">
                 <label>Birthday</label>
-                    <input 
-                        className="form-control"
-                        type="text" 
-                        name="birthday" 
-                        value={inputs.birthday || ""} 
-                        onChange={handleChange}
-                    />
+                <input 
+                    className="form-control"
+                    type="date"
+                    id="birthday"
+                    name="birthday"
+                    onChange={handleChange} 
+                />
             </div>
             <div className="form-group my-3">
                     <label>Sex</label>

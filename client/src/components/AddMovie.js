@@ -53,7 +53,7 @@ const InputMovie = () => {
                             </option>
                             {movies.map(movie => 
                                 <option value={movie.id}>{`${movie.title} (${movie.release_year}) `}</option>
-                                )}
+                            )}
                         </select>
                 </div>
                 <div className="form-group my-3">
