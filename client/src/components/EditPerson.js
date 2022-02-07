@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const EditPerson = ({person}) => {
     const editPerson = async () => {
         try {
-            const response = await fetch("http://localhost:5000/person/" + person.id, {method: "PUT", headers: { "Content-Type": "application/json" },
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/person/" + person.id, {method: "PUT", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(inputs)});
     
             const responseJson = await response.json();

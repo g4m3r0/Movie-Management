@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const InputRole = () => {
 
@@ -19,7 +20,7 @@ const InputRole = () => {
 
         console.log(inputs);
         
-        const response = await fetch("http://localhost:5000/role", {method: "POST", headers: { "Content-Type": "application/json" },
+        const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/role", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 
         const responseJson = await response.json();
@@ -32,7 +33,7 @@ const InputRole = () => {
       }
 
       async function getPersons() {
-        const res = await fetch("http://localhost:5000/person");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/person");
 
         const personArray = await res.json();
         setPersons(personArray);
@@ -40,7 +41,7 @@ const InputRole = () => {
     }
 
     async function getMovies() {
-        const res = await fetch("http://localhost:5000/movie");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie");
 
         const movieArray = await res.json();
         setMovies(movieArray);
@@ -48,7 +49,7 @@ const InputRole = () => {
     }
 
     async function getRoles() {
-        const res = await fetch("http://localhost:5000/role/distinct");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/role/distinct");
 
         const rolesArray = await res.json();
         setRoles(rolesArray);

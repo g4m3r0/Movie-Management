@@ -1,12 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const ListRatings = () => {
 
     const [ratings, setRatings] = useState([]);
 
     async function getRatings() {
-        const res = await fetch("http://localhost:5000/rating");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/rating");
 
         const ratingArray = await res.json();
         setRatings(ratingArray);
@@ -17,7 +18,7 @@ const ListRatings = () => {
         try {
 
             // send request to the backend to delete the record
-            const response = await fetch(`http://localhost:5000/rating/${id}`, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/rating/" + id, {
                 method: "DELETE"
             });
 

@@ -1,12 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const ListRoles = () => {
 
     const [roles, setRoles] = useState([]);
 
     async function getRoles() {
-        const res = await fetch("http://localhost:5000/role");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/role");
 
         const rolesArray = await res.json();
         setRoles(rolesArray);
@@ -17,7 +18,7 @@ const ListRoles = () => {
         try {
 
             // send request to the backend to delete the record
-            const response = await fetch(`http://localhost:5000/role/${id}`, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/role/" + id, {
                 method: "DELETE"
             });
 

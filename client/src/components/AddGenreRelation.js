@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const InputGenreRelation = () => {
 
@@ -16,7 +17,7 @@ const InputGenreRelation = () => {
       const handleSubmit = async event => {
         event.preventDefault();
         console.log(inputs);
-        const response = await fetch("http://localhost:5000/genrerelation", {method: "POST", headers: { "Content-Type": "application/json" },
+        const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/genrerelation", {method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputs)});
 
         const responseJson = await response.json();
@@ -29,7 +30,7 @@ const InputGenreRelation = () => {
       }
 
       async function getMovies() {
-            const res = await fetch("http://localhost:5000/movie");
+            const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie");
 
             const movieArray = await res.json();
             setMovies(movieArray);
@@ -37,7 +38,7 @@ const InputGenreRelation = () => {
         }
 
         async function getGenres() {
-            const res = await fetch("http://localhost:5000/genre");
+            const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/genre");
     
             const genreArray = await res.json();
             setGenres(genreArray);

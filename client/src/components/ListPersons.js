@@ -1,13 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
 import EditPerson from "./EditPerson";
+import env from "react-dotenv";
 
 const ListPersons = () => {
 
     const [persons, setPersons] = useState([]);
 
     async function getPersons() {
-        const res = await fetch("http://localhost:5000/person");
+        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/person");
 
         const personArray = await res.json();
         setPersons(personArray);
@@ -18,7 +19,7 @@ const ListPersons = () => {
         try {
 
             // send request to the backend to delete the record
-            const response = await fetch(`http://localhost:5000/person/${id}`, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/person/" + id, {
                 method: "DELETE"
             });
 

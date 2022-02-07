@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { handleError, checkLogin } from './Helpers'
+import { handleError, checkLogin } from './Helpers';
+import env from "react-dotenv";
 
 const EditRating = ({movie}) => {
     const editRating = async (movieId) => {
@@ -12,7 +13,7 @@ const EditRating = ({movie}) => {
             var username = window.sessionStorage.getItem('username');
             const body = {username, movieId, rating};
 
-            const response = await fetch(`http://localhost:5000/rating`, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/rating", {
             method: "POST", 
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)

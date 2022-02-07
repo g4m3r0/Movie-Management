@@ -1,12 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { handleError } from './Helpers'
+import { handleError } from './Helpers';
+import env from "react-dotenv";
 
 const ListGenreRelation = () => {
 
     const [genres, setGenres] = useState([]);
 
     async function getGenres() {
-        const response = await fetch("http://localhost:5000/genrerelation");
+        const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/genrerelation");
 
         const genreArray = await response.json();
         setGenres(genreArray);
@@ -18,7 +19,7 @@ const ListGenreRelation = () => {
         try {
 
             // send request to the backend to delete the record
-            const response = await fetch(`http://localhost:5000/genrerelation/${id}`, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/genrerelation/" + id, {
                 method: "DELETE"
             });
 
