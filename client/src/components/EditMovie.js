@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { handleError } from './Helpers';
 import env from "react-dotenv";
 
-const EditMovie = ({movie}) => {
+const EditMovie = ({movie, movies}) => {
     const editMovie = async () => {
         try {
             const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie/" + movie.id, {method: "PUT", headers: { "Content-Type": "application/json" },
@@ -20,27 +20,13 @@ const EditMovie = ({movie}) => {
         }
     }
 
-    async function getMovies() {
-        const res = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie");
-
-        const movieArray = await res.json();
-        setMovies(movieArray);
-        console.log(movieArray);
-    }
-
     const [inputs, setInputs] = useState({});
-    const [movies, setMovies] = useState([]);
-
+ 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
     }
-
-    // Runs any time the component is rendered
-    useEffect(() => {
-        getMovies();
-    }, []);
 
     return (
         <Fragment> 
