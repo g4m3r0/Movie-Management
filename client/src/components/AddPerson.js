@@ -63,13 +63,13 @@ const InputPerson = () => {
             </div>
             <div className="form-group my-3">
                     <label>Sex</label>
-                        <select name="sex" onChange={handleChange} className="form-select form-select-sm">
-                            <option selected disabled>
+                        <select defaultValue={'DEFAULT'} name="sex" onChange={handleChange} className="form-select form-select-sm">
+                            <option value="DEFAULT" disabled>
                                 Choose a Sex
                             </option>
-                            <option value="0">Diverse</option>
-                            <option value="1">Female</option>
-                            <option value="2">Male</option>
+                            <option key="0" value="0">Diverse</option>
+                            <option key="1" value="1">Female</option>
+                            <option key="2" value="2">Male</option>
                     </select>
             </div>
             <div className="form-group my-3">
