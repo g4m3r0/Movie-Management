@@ -49,7 +49,7 @@ const InputPerson = () => {
                         name="lastName" 
                         value={inputs.lastName || ""} 
                         onChange={handleChange}
-                    />  
+                    />
             </div>
             <div className="form-group my-3">
                 <label>Birthday</label>
