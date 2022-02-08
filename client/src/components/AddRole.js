@@ -72,7 +72,7 @@ const InputRole = () => {
                     <label>Movie</label>
                     <select name="movieId" onChange={handleChange} className="form-select form-select-sm">
                         <option selected disabled>
-                            Choose a Person
+                            Choose a Movie
                         </option>
                         {movies.map(movie => 
                             <option value={movie.id}>{movie.title + " (" + movie.release_year + ")"}</option>
