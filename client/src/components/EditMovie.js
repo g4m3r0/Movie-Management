@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { handleError } from './Helpers';
 import env from "react-dotenv";
 
-const EditMovie = ({movie}) => {
+const EditMovie = ({movie, movies}) => {
     const editMovie = async () => {
         try {
             const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/movie/" + movie.id, {method: "PUT", headers: { "Content-Type": "application/json" },
@@ -21,7 +21,7 @@ const EditMovie = ({movie}) => {
     }
 
     const [inputs, setInputs] = useState({});
-
+ 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -43,8 +43,15 @@ const EditMovie = ({movie}) => {
                         </div>
                         <div className="modal-body">
                             <div className="form-group my-3">
-                                <label>Parent Movie</label>
-                                <input type="number" name="parentMovie" className="form-control" placeholder={movie.parent_movie} value={inputs.parent_movie} onChange={handleChange}></input>
+                            <label>Parent Movie</label>
+                                <select name="parentMovie" onChange={handleChange} className="form-select form-select-sm">
+                                    <option selected disabled>
+                                        Choose a Movie
+                                    </option>
+                                    {movies.map(movie => 
+                                        <option value={movie.id}>{`${movie.title} (${movie.release_year}) `}</option>
+                                    )}
+                                </select>
                             </div>
                             <div className="form-group my-3">
                                 <label>Title</label>

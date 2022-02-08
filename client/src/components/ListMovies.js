@@ -73,7 +73,7 @@ const ListMovies = () => {
                             <td>{movie.genres}</td>
                             <td>{movie.parent_movie_title}</td>
                             <td><EditRating movie={movie} /></td>
-                            <td><EditMovie movie={movie} /></td>
+                            <td><EditMovie movie={movie} movies={movies} /></td>
                             <td><button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</button></td>
                         </tr>
                     ))
