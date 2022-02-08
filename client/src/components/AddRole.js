@@ -59,23 +59,23 @@ const InputRole = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group my-3">
                     <label>Person</label>
-                    <select name="personId" onChange={handleChange} className="form-select form-select-sm">
-                        <option selected disabled>
+                    <select defaultValue={'DEFAULT'} name="personId" onChange={handleChange} className="form-select form-select-sm">
+                        <option value="DEFAULT" disabled>
                             Choose a Person
                         </option>
                         {persons.map(person => 
-                            <option value={person.id}>{person.first_name + " " + person.last_name}</option>
+                            <option key={person.id} value={person.id}>{person.first_name + " " + person.last_name}</option>
                             )}
                     </select>
                 </div>
                 <div className="form-group my-3">
                     <label>Movie</label>
-                    <select name="movieId" onChange={handleChange} className="form-select form-select-sm">
-                        <option selected disabled>
+                    <select defaultValue={'DEFAULT'} name="movieId" onChange={handleChange} className="form-select form-select-sm">
+                        <option value="DEFAULT" disabled>
                             Choose a Movie
                         </option>
                         {movies.map(movie => 
-                            <option value={movie.id}>{movie.title + " (" + movie.release_year + ")"}</option>
+                            <option key={movie.id} value={movie.id}>{movie.title + " (" + movie.release_year + ")"}</option>
                             )}
                     </select>
                 </div>
