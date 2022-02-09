@@ -17,6 +17,9 @@ var person = require('./routes/person');
 var movie = require('./routes/movie');
 var rating = require('./routes/rating');
 var suggest = require('./routes/suggest');
+var genre = require('./routes/genre');
+var genrerelation = require('./routes/genrerelation');
+var role = require('./routes/role');
 
 // Film Related Person
 app.post('/person', person.add);
@@ -49,45 +52,12 @@ app.get('/genre', genre.get);
 app.put('/genre/:id', genre.update);
 app.delete('/genre/:id', genre.delete);
 
-// Add genre relation
-app.post("/genrerelation", async(req, res) => {
-    try {
-        const { movieId, genreId } = req.body;
-        const newRole = await pool.query(
-            "Call create_or_update_genre_relation(null, $1, $2)", [movieId, genreId]);
+// Genre Relation
+app.post('/genrerelation', genrerelation.add);
+app.get('/genrerelation', genrerelation.get);
+app.delete('/genrerelation/:id', genrerelation.delete);
 
-        res.json("Genre relation added!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-
-// Get genre relations
-app.get("/genrerelation", async(req, res) => {
-    try {
-        const allGenreRelations = await pool.query("SELECT * FROM genre_view");
-        res.json(allGenreRelations.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Delete genre relation
-app.delete("/genrerelation/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const deleteGenreRelation = await pool.query("DELETE FROM mm_genre_relation WHERE id = $1", [id]);
-
-        res.json("Genre Relation was deleted!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
+// Role
 
 // Add role
 app.post("/role", async(req, res) => {
