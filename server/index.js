@@ -381,6 +381,21 @@ app.get("/user", async(req, res) => {
     }
 });
 
+// Add user
+app.post("/user", async(req, res) => {
+    try {
+        console.log(req.body);
+        const { username, firstname, lastname, birthday, sex, email } = req.body;
+        const newUser = await pool.query("INSERT INTO mm_user (user_name, last_name, first_name, birthday, sex, email) VALUES ($1, $2, $3, $4, $5, $6)", [username, firstname, lastname, birthday, sex, email]);
+
+        res.json("User was added!");
+    } catch (error) {
+        res.json("Error:" + error.message);
+        console.error(error);
+    }
+});
+
+
 // Delete user
 app.delete("/user/:id", async(req, res) => {
     try {
