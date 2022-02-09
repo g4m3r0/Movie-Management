@@ -43,59 +43,11 @@ app.delete('/rating/:id', rating.delete);
 // Suggest
 app.get('/suggest', suggest.get);
 
-// Add genre [mm_genre]
-app.post("/genre", async(req, res) => {
-    try {
-        const { genreName } = req.body;
-        const newGenre = await pool.query(
-            "Call create_or_update_genre(null, $1)", [genreName]);
-
-        res.json("Genre was added!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Update genre
-app.put("/genre/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const { genreName } = req.body;
-
-        const updateGenre = await pool.query(
-            "Call create_or_update_genre($1, $2)", [id, genreName]);
-
-        res.json("Rating was updated!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Get genres
-app.get("/genre", async(req, res) => {
-    try {
-        const allGenres = await pool.query("SELECT * FROM mm_genre ORDER BY genre_name ASC");
-        res.json(allGenres.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Delete genre
-app.delete("/genre/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const deleteGenre = await pool.query("DELETE FROM mm_genre WHERE id = $1", [id]);
-
-        res.json("Genre was deleted!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
+//Genre
+app.post('/genre', genre.add);
+app.get('/genre', genre.get);
+app.put('/genre/:id', genre.update);
+app.delete('/genre/:id', genre.delete);
 
 // Add genre relation
 app.post("/genrerelation", async(req, res) => {
