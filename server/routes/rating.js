@@ -18,7 +18,7 @@ exports.add = async(req, res) => {
 };
 
 // Get rating
-exports.add = async(req, res) => {
+exports.get = async(req, res) => {
     try {
         const allRatings = await pool.query("SELECT * FROM rating_view");
 
@@ -29,7 +29,7 @@ exports.add = async(req, res) => {
     }
 };
 
-exports.add = async(req, res) => {
+exports.getSingle = async(req, res) => {
     try {
         const { id } = req.params;
         const rating = await pool.query("SELECT * FROM rating_view WHERE id = $1", [id]);
@@ -43,7 +43,7 @@ exports.add = async(req, res) => {
 };
 
 // Update rating
-exports.add = async(req, res) => {
+exports.update = async(req, res) => {
     try {
         const { id } = req.params;
         const { username, movieId, rating } = req.body;
@@ -58,7 +58,7 @@ exports.add = async(req, res) => {
 };
 
 // Delete rating
-exports.add = async(req, res) => {
+exports.delete = async(req, res) => {
     try {
         const { id } = req.params;
         const deleteRating = await pool.query("DELETE FROM mm_rating WHERE id = $1", [id]);
