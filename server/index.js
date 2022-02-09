@@ -13,71 +13,14 @@ app.use(express.json());
 
 // API Routes //
 
-// Add film related person
-app.post("/person", async(req, res) => {
-    try {
-        const { firstName, lastName, birthday, sex, cv } = req.body;
-        const newPerson = await pool.query("CALL create_or_update_person(null, $1, $2, $3, $4, $5)", [firstName, lastName, birthday, sex, cv]);
+var person = require('./routes/person');
 
-        res.json("Person was added!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Get film related person
-app.get("/person", async(req, res) => {
-    try {
-        const allPersons = await pool.query("SELECT * FROM person_view");
-
-        res.json(allPersons.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-app.get("/person/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const person = await pool.query("SELECT * FROM person_view WHERE id = $1", [id]);
-
-        res.json(person.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Update film related person
-app.put("/person/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const { firstName, lastName, birthday, sex, cv } = req.body;
-
-        const updatePerson = await pool.query("CALL create_or_update_person($1, $2, $3, $4, $5, $6)", [id, firstName, lastName, birthday, sex, cv]);
-
-        res.json("Person was updated!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Delete film related person
-app.delete("/person/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const deletePerson = await pool.query("DELETE FROM mm_person WHERE id = $1", [id]);
-
-        res.json("Person was deleted!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
+// Film Related Person
+app.post('/person', person.add);
+app.get('/person', person.get);
+app.get('/person/:id', person.getSingle);
+app.put('/person/:id', person.update);
+app.delete('/person/:id', person.delete);
 
 // Add movie
 app.post("/movie", async(req, res) => {
