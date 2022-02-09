@@ -20,6 +20,7 @@ var suggest = require('./routes/suggest');
 var genre = require('./routes/genre');
 var genrerelation = require('./routes/genrerelation');
 var role = require('./routes/role');
+var user = require('./routes/user');
 
 // Film Related Person
 app.post('/person', person.add);
@@ -63,45 +64,10 @@ app.get('/role', role.get);
 app.get('/role/distinct', role.getDistinct);
 app.delete('/role/:id', role.delete);
 
-// Get users
-app.get("/user", async(req, res) => {
-    try {
-        const allUsers = await pool.query("SELECT * FROM user_view");
-
-        res.json(allUsers.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Add user
-app.post("/user", async(req, res) => {
-    try {
-        console.log(req.body);
-        const { username, firstname, lastname, birthday, sex, email } = req.body;
-        const newUser = await pool.query("INSERT INTO mm_user (user_name, last_name, first_name, birthday, sex, email) VALUES ($1, $2, $3, $4, $5, $6)", [username, firstname, lastname, birthday, sex, email]);
-
-        res.json("User was added!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-
-// Delete user
-app.delete("/user/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const deleteUser = await pool.query("DELETE FROM mm_user WHERE id = $1", [id]);
-
-        res.json("User was deleted!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
+// User
+app.post('/user', user.add);
+app.get('/user', user.get);
+app.delete('/user/:id', user.delete);
 
 app.listen(port, () => {
     console.log("Server has started listening on port " + port);
