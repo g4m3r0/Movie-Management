@@ -4,7 +4,6 @@ require('dotenv').config();
 const pool = require("./../db");
 
 // Add film related person
-
 exports.add = async function(req, res){
     try {
         const { firstName, lastName, birthday, sex, cv } = req.body;

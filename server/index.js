@@ -14,6 +14,7 @@ app.use(express.json());
 // API Routes //
 
 var person = require('./routes/person');
+var movie = require('./routes/movie');
 
 // Film Related Person
 app.post('/person', person.add);
@@ -22,70 +23,13 @@ app.get('/person/:id', person.getSingle);
 app.put('/person/:id', person.update);
 app.delete('/person/:id', person.delete);
 
-// Add movie
-app.post("/movie", async(req, res) => {
-    try {
-        const { parentMovie, title, releaseYear, requiredAge, productionCountry } = req.body;
-        const newMovie = await pool.query("CALL create_or_update_movie(null, $1, $2, $3, $4, $5)", [parentMovie, title, releaseYear, requiredAge, productionCountry]);
 
-        res.json("Movie was added!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Get movies
-app.get("/movie", async(req, res) => {
-    try {
-        const allMovies = await pool.query("SELECT * FROM movie_view");
-
-        res.json(allMovies.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-app.get("/movie/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const movie = await pool.query("SELECT * FROM movie_view WHERE id = $1", [id]);
-
-        res.json(movie.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Update movie
-app.put("/movie/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const { parentMovie, title, releaseYear, requiredAge, productionCountry } = req.body;
-        console.log(req.body);
-        const updateMovie = await pool.query("CALL create_or_update_movie($1, $2, $3, $4, $5, $6)", [id, parentMovie, title, releaseYear, requiredAge, productionCountry]);
-
-        res.json("Movie was updated!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
-
-// Delete movie
-app.delete("/movie/:id", async(req, res) => {
-    try {
-        const { id } = req.params;
-        const deleteMovie = await pool.query("DELETE FROM mm_movie WHERE id = $1", [id]);
-
-        res.json("Movie was deleted!");
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
+// Movie
+app.post('/movie', person.add);
+app.get('/movie', person.get);
+app.get('/movie/:id', person.getSingle);
+app.put('/movie/:id', person.update);
+app.delete('/movie/:id', person.delete);
 
 // Add rating
 app.post("/rating", async(req, res) => {
