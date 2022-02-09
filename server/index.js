@@ -16,6 +16,7 @@ app.use(express.json());
 var person = require('./routes/person');
 var movie = require('./routes/movie');
 var rating = require('./routes/rating');
+var suggest = require('./routes/suggest');
 
 // Film Related Person
 app.post('/person', person.add);
@@ -39,18 +40,8 @@ app.get('/rating/:id', rating.getSingle);
 app.put('/rating/:id', rating.update);
 app.delete('/rating/:id', rating.delete);
 
-// Get suggestion
-app.get("/suggest/:username", async(req, res) => {
-    try {
-        const { username } = req.params;
-        const suggestedMovies = await pool.query("SELECT * FROM suggest_movies($1)", [username]);
-
-        res.json(suggestedMovies.rows);
-    } catch (error) {
-        res.json("Error:" + error.message);
-        console.error(error);
-    }
-});
+// Suggest
+app.get('/suggest', suggest.get);
 
 // Add genre [mm_genre]
 app.post("/genre", async(req, res) => {
