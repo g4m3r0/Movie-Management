@@ -52,15 +52,29 @@ const EditPerson = ({person}) => {
                             </div>
                             <div className="form-group my-3">
                                 <label>Birthday</label>
-                                <input type="text" name="birthday" className="form-control" placeholder={person.birthday} value={inputs.birthday} onChange={handleChange}></input>
+                                <input type="date" name="birthday" className="form-control" placeholder={person.birthday} value={inputs.birthday} onChange={handleChange}></input>
                             </div>
                             <div className="form-group my-3">
-                                <label>Sex</label>
-                                <input type="number" name="sex" className="form-control" placeholder={person.sex} value={inputs.sex} onChange={handleChange}></input>
+                            <label>Sex</label>
+                                <select defaultValue={'DEFAULT'} name="sex" onChange={handleChange} className="form-select form-select-sm">
+                                    <option value="DEFAULT" disabled>
+                                        Choose a Sex
+                                    </option>
+                                    <option key="0" value="0">Diverse</option>
+                                    <option key="1" value="1">Female</option>
+                                    <option key="2" value="2">Male</option>
+                            </select>
                             </div>
                             <div className="form-group my-3">
                                 <label>CV</label>
-                                <input type="text" name="cv" className="form-control" placeholder={person.cv} value={inputs.cv} onChange={handleChange}></input>
+                                    <textarea  
+                                        className="form-control"
+                                        type="text" 
+                                        name="cv" 
+                                        value={inputs.cv}
+                                        placeholder={person.cv}
+                                        onChange={handleChange}
+                                    />
                             </div>
                         </div>
                         <div className="modal-footer">
