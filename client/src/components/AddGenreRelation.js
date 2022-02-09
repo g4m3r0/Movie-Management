@@ -58,23 +58,23 @@ const InputGenreRelation = () => {
                
                 <div className="form-group my-3">
                     <label>Movie</label>
-                    <select name="movieId" onChange={handleChange} className="form-select form-select-sm">
-                        <option selected disabled>
+                    <select defaultValue={'DEFAULT'} name="movieId" onChange={handleChange} className="form-select form-select-sm">
+                        <option value="DEFAULT" disabled>
                             Choose a Movie
                         </option>
                         {movies.map(movie => 
-                            <option value={movie.id}>{movie.title + " (" + movie.release_year + ")"}</option>
+                            <option key={movie.id} value={movie.id}>{movie.title + " (" + movie.release_year + ")"}</option>
                             )}
                     </select>
                 </div>
                 <div className="form-group my-3">
                     <label>Genre </label>
-                    <select name="genreId" onChange={handleChange} className="form-select form-select-sm">
-                        <option selected disabled>
+                    <select defaultValue={'DEFAULT'} name="genreId" onChange={handleChange} className="form-select form-select-sm">
+                        <option value="DEFAULT" disabled>
                             Choose a Genre
                         </option>
                         {genres.map(genre => 
-                            <option value={genre.id}>{genre.genre_name}</option>
+                            <option key={genre.id} value={genre.id}>{genre.genre_name}</option>
                             )}
                     </select>
                 </div>
