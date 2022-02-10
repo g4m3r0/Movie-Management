@@ -45,7 +45,7 @@ app.put('/rating/:id', rating.update);
 app.delete('/rating/:id', rating.delete);
 
 // Suggest
-app.get('/suggest', suggest.get);
+app.get('/suggest/:username', suggest.get);
 
 //Genre
 app.post('/genre', genre.add);
@@ -67,7 +67,7 @@ app.delete('/role/:id', role.delete);
 // User
 app.post('/user', user.add);
 app.get('/user', user.get);
-app.delete('/user/:id', user.delete);
+app.delete('/user/:user_name', user.delete);
 
 app.listen(port, () => {
     console.log("Server has started listening on port " + port);

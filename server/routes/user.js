@@ -20,7 +20,7 @@ exports.add = async(req, res) => {
     try {
         console.log(req.body);
         const { username, firstname, lastname, birthday, sex, email } = req.body;
-        const newUser = await pool.query("INSERT INTO mm_user (user_name, last_name, first_name, birthday, sex, email) VALUES ($1, $2, $3, $4, $5, $6)", [username, firstname, lastname, birthday, sex, email]);
+        const newUser = await pool.query("INSERT INTO mm_user (user_name, last_name, first_name, birthday, sex, email) VALUES ($1, $2, $3, $4, $5, $6)", [username, lastname, firstname, birthday, sex, email]);
 
         res.json("User was added!");
     } catch (error) {
@@ -32,8 +32,8 @@ exports.add = async(req, res) => {
 // Delete user
 exports.delete = async(req, res) => {
     try {
-        const { id } = req.params;
-        const deleteUser = await pool.query("DELETE FROM mm_user WHERE id = $1", [id]);
+        const { user_name } = req.params;
+        const deleteUser = await pool.query("DELETE FROM mm_user WHERE user_name = $1", [user_name]);
 
         res.json("User was deleted!");
     } catch (error) {

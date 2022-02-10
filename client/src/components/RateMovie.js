@@ -47,8 +47,8 @@ const EditRating = ({movie}) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={e => setRating(movie.rating)}></button>
                         </div>
                         <div className="modal-body">
-                            <p>Rate a movie from 1 (Bad) to 5 (Awesome).</p>
-                            <input min="1" max="5" type="number" className="form-control" onChange={e => setRating(e.target.value)}></input>
+                            <p>Rate a movie from 0.0 (Bad) to 5.0 (Awesome).</p>
+                            <input min="0" max="5" type="number" className="form-control" onChange={e => setRating(e.target.value)}></input>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={e => setRating(movie.rating)}>Close</button>

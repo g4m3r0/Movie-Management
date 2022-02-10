@@ -14,20 +14,22 @@ const ListUsers = () => {
         console.log(usersArray);
     }
 
-    async function deleteUser(id){
+    async function deleteUser(user_name){
         try {
 
             // send request to the backend to delete the record
-            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/user/" + id, {
+            const response = await fetch("http://" + env.SERVER_HOST + ":" + env.SERVER_PORT + "/user/" + user_name, {
                 method: "DELETE"
             });
-
-            // remove item from the table
-            setUsers(users.filter(users => users.id !== id));
 
             const responseJson = await response.json();
             console.log(responseJson);
             handleError(responseJson);
+
+            // remove item from the table
+            if(!responseJson.includes("Error:")){
+                setUsers(users.filter(users => users.user_name !== user_name));
+            }
         } catch (error) {
             console.log(error.message);
         }
@@ -61,9 +63,9 @@ const ListUsers = () => {
                             <td>{user.first_name}</td>
                             <td>{user.last_name}</td>
                             <td>{user.birthday}</td>
-                            <td>{user.sex_as_type}</td>
+                            <td>{user.sex}</td>
                             <td>{user.email}</td>
-                            <td><button className="btn btn-danger" onClick={() => deleteUser(user.id)}>Delete</button></td>
+                            <td><button className="btn btn-danger" onClick={() => deleteUser(user.user_name)}>Delete</button></td>
 
                         </tr>
                     ))

@@ -45,7 +45,7 @@ const EditMovie = ({movie, movies}) => {
                             <div className="form-group my-3">
                             <label>Parent Movie</label>
                                 <select defaultValue={'DEFAULT'} name="parentMovie" onChange={handleChange} className="form-select form-select-sm">
-                                    <option defaultValue={'DEFAULT'} disabled>
+                                    <option defaultValue={'DEFAULT'}>
                                         Choose a Movie
                                     </option>
                                     {movies.map(movie => 
