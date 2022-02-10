@@ -7,7 +7,7 @@ const pool = require("./../db");
 exports.add = async function(req, res){
     try {
         const { firstName, lastName, birthday, sex, cv } = req.body;
-        const newPerson = await pool.query("CALL create_or_update_person(null, $1, $2, $3, $4, $5)", [firstName, lastName, birthday, sex, cv]);
+        const newPerson = await pool.query("CALL create_or_update_person(null, $1, $2, $3, $4, $5)", [lastName, firstName, birthday, sex, cv]);
 
         res.json("Person was added!");
     } catch (error) {
