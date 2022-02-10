@@ -32,8 +32,8 @@ exports.add = async(req, res) => {
 // Delete user
 exports.delete = async(req, res) => {
     try {
-        const { id } = req.params;
-        const deleteUser = await pool.query("DELETE FROM mm_user WHERE id = $1", [id]);
+        const { user_name } = req.params;
+        const deleteUser = await pool.query("DELETE FROM mm_user WHERE user_name = $1", [user_name]);
 
         res.json("User was deleted!");
     } catch (error) {
