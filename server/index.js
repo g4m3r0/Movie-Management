@@ -45,7 +45,7 @@ app.put('/rating/:id', rating.update);
 app.delete('/rating/:id', rating.delete);
 
 // Suggest
-app.get('/suggest', suggest.get);
+app.get('/suggest/:username', suggest.get);
 
 //Genre
 app.post('/genre', genre.add);
