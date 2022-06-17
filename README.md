@@ -3,7 +3,9 @@
 
 **[Advanced Management of Data](https://www.tu-chemnitz.de/informatik/DVS/index.php) Term Project WS21/22**
 
-A simple movie management system implemented in PostgreSQL with a Node.js frontend by Rober Schulz and Lucas Schmutzler.
+A simple movie management system implemented in PostgreSQL with a Node.js frontend by Robert Schulz and Lucas Schmutzler.
+
+![Interface](screenshot.png)
 
 ## Requirements
 - PostgreSQL
